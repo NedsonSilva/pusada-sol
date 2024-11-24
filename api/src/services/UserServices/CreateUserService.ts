@@ -45,7 +45,7 @@ export const CreateUserService = async ({
     });
 
     try {
-        await schema.validate({ email, password, name });
+        await schema.validate({ email, password, name, profile });
     } catch (err) {
         throw new AppError(err.message);
     }

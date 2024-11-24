@@ -9,11 +9,13 @@ import { SplitButtonModule } from 'app/shared/components/split-button/split-butt
 import { FormSharedModule } from 'app/shared/form-shared.module';
 
 import { ContactsFormModule } from '../reservations/form/form.module';
+import { RoomFormComponent } from './form/form.component';
 import { RoomsComponent } from './rooms.component';
 import { roomsRoutes } from './rooms.routes';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
-    declarations: [RoomsComponent],
+    declarations: [RoomsComponent, RoomFormComponent],
     imports: [
         FormSharedModule,
         RouterModule.forChild(roomsRoutes),
@@ -23,7 +25,8 @@ import { roomsRoutes } from './rooms.routes';
         MatSortModule,
         MatMenuModule,
         ContactsFormModule,
-        MatDialogModule
+        MatDialogModule,
+        MatProgressSpinnerModule
     ],
     exports: [],
 })

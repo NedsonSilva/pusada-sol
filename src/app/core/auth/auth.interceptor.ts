@@ -32,11 +32,15 @@ export class AuthInterceptor implements HttpInterceptor {
 
         return next.handle(newReq).pipe(
             catchError((error) => {
+                console.log('ee error', error);
                 if (error instanceof HttpErrorResponse) {
                     const errorData = error.error;
 
                     if (errorData?.error) {
                         this.toastService.error(errorData.error);
+                    }
+                    else if (error.message) {
+                        this.toastService.error(`${error.status} ${error.statusText}`);
                     }
                 }
 

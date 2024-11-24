@@ -1,0 +1,68 @@
+<div class="w-[90vw] md:w-160 max-w-screen-md min-h-40 bg-default p-5">
+    <div class="w-full">
+        <h1 class="text-xl text-primary font-semibold">
+            {{ data.room?.id ? 'Editar' : 'Adicionar' }} Quarto
+        </h1>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="submitForm()" class="mt-10">
+        <div class="flex flex-col gap-5">
+            <div>
+                <app-input label="Número do quarto" formControlName="number"></app-input>
+            </div>
+            <div>
+                <app-input label="Valor diária" currencyMask="monetario" formControlName="dailyPrice"></app-input>
+            </div>
+            <div>
+                <app-input label="Capacidade" type="number" formControlName="capacity"></app-input>
+            </div>
+            <div>
+                <mat-form-field class="w-full">
+                    <mat-label>Descrição</mat-label>
+                    <textarea matInput class="resize-none h-16" formControlName="description"></textarea>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field class="w-full">
+                    <mat-label>Status</mat-label>
+                    <mat-select formControlName="status">
+                        <mat-option value="available">
+                            Disponível
+                        </mat-option>
+                        <mat-option value="unavailable">
+                            Indisponível
+                        </mat-option>
+                        <mat-option value="unavailable">
+                            Manutenção
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="w-full mt-5 mb-5 border-t"></div>
+        <div class="flex justify-end gap-2">
+            <button
+                type="button"
+                mat-button
+                mat-dialog-close
+                color="warn"
+                [disabled]="form.disabled"
+            >
+                Cancelar
+            </button>
+            <button
+                mat-flat-button
+                color="primary"
+                [disabled]="form.disabled"
+                class="min-w-30"
+            >
+                {{ data.room?.id ? 'Salvar' : 'Adicionar' }}
+                @if (form.disabled) {
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+                    </div>
+                }
+            </button>
+        </div>
+    </form>
+</div>

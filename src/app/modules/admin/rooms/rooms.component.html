@@ -11,49 +11,92 @@
                 </mat-form-field>
             </div>
             <div>
-                <split-button label="Adicionar Quarto" [showIconMenu]="false" (onClick)="openModalFormClient()">
+                <split-button label="Adicionar Quarto" [showIconMenu]="false" (onClick)="openFormRoom()">
                 </split-button>
             </div>
         </div>
     </div>
     <div class="flex flex-col flex-auto overflow-hidden border shadow-md bg-card h-full relative">
         <div class="w-full overflow-x-auto">
-            <div class="w-full overflow-x-auto">
-                <table class="w-full table-auto">
-                    <thead>
-                        <tr class="border-b">
-                            <th class="p-2 whitespace-nowrap">
-                                Id
-                            </th>
-                            <th class="p-2 whitespace-nowrap">
-                                Nome
-                            </th>
-                            <th class="p-2 whitespace-nowrap">
-                                Telefone
-                            </th>
-                            <th class="p-2 whitespace-nowrap">
-                                E-mail
-                            </th>
-                            <th class="p-2 whitespace-nowrap">
-                                Cpf
-                            </th>
-                            <th class="p-2 whitespace-nowrap">
-                                Endereço
-                            </th>
-                            <th class="p-2 whitespace-nowrap">
+            <table class="w-full table-auto">
+                <thead>
+                    <tr class="border-b">
+                        <th class="p-2 whitespace-nowrap">
+                            Número do quarto
+                        </th>
+                        <th class="p-2 whitespace-nowrap">
+                            Capacidade
+                        </th>
+                        <th class="p-2 whitespace-nowrap">
+                            Valor Diária
+                        </th>
+                        <th class="p-2 whitespace-nowrap">
+                            Descrição
+                        </th>
+                        <th class="p-2 whitespace-nowrap">
+                            Status
+                        </th>
+                        <th class="p-2 max-w-10 whitespace-nowrap">
+                            Ações
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (item of clients()?.data; track item.id) {
+                        <tr class="border-b text-center">
+                            <td class="p-2 truncate">
+                                {{ item.number }}
+                            </td>
+                            <td class="p-2 truncate min-w-20">
+                                {{ item.capacity }} pessoas
+                            </td>
+                            <td class="p-2 truncate min-w-10">
+                                {{ item.dailyPrice|currency }}
+                            </td>
+                            <td class="p-2 truncate min-w-10">
+                                {{ item.description || 'Sem descrição' }}
+                            </td>
+                            <td class="p-2 truncate min-w-20">
+                                @switch (item.status) {
+                                    @case ('available') {
+                                        <div class="w-max mx-auto px-2 py-1 rounded bg-blue-500 bg-opacity-20 text-blue-500">
+                                            Disponível
+                                        </div>
+                                    }
+                                    @case ('unavailable') {
+                                        <div class="w-max mx-auto px-2 py-1 rounded bg-red-500 bg-opacity-20 text-red-500">
+                                            Indisponível
+                                        </div>
+                                    }
+                                    @case ('maintenance') {
+                                        <div class="w-max mx-auto px-2 py-1 rounded bg-orange-300 bg-opacity-20 text-orange-300">
+                                            Em manutenção
+                                        </div>
+                                    }
+                                    @case ('reserved') {
+                                        <div class="w-max mx-auto px-2 py-1 rounded bg-green-500 bg-opacity-20 text-green-500">
+                                            Reservado
+                                        </div>
+                                    }
+                                }
+                            </td>
+                            <td class="px-2">
+                                <button [matMenuTriggerFor]="menuActions" mat-icon-button>
+                                    <mat-icon svgIcon="heroicons_outline:dots-vertical" class="text-current"></mat-icon>
+                                </button>
+                                <mat-menu #menuActions>
+                                    <button (click)="openFormRoom(item)" mat-menu-item>
+                                        <span class="font-medium">Editar</span>
+                                    </button>
+                                    <button (click)="remove(item)" mat-menu-item>
+                                        <span class="font-medium text-warn">Excluir</span>
+                                    </button>
+                                </mat-menu>
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        @for (item of clients()?.data; track item.id) {
-                            <tr class="border-b">
-                                <td class="p-2 whitespace-nowrap">
-
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
+                    }
+                </tbody>
+            </table>
         </div>
         <div class="mt-auto">
             <mat-paginator

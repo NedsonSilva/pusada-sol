@@ -35,7 +35,8 @@ export class UsersComponent extends ListBase<User, UserFilter, UsersService> {
         });
     }
 
-    remove(User: User) {
+
+    remove(user: User) {
         this.confirmService.open(
             {
                 message: 'Tem certeza que deseja excluir o usuário?',
@@ -44,7 +45,7 @@ export class UsersComponent extends ListBase<User, UserFilter, UsersService> {
             },
             () => {
                 this.loading.set(true)
-                this.service.delete(User.id).subscribe({
+                this.service.delete(user.id).subscribe({
                     next: () => {
                         this.toastService.success('Usuário excluido com sucesso');
                         this.loading.set(false);

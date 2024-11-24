@@ -1,5 +1,6 @@
 import {
     AutoIncrement,
+    BelongsTo,
     Column,
     CreatedAt,
     DataType,
@@ -57,4 +58,10 @@ export class Reservation extends Model<Reservation> {
 
     @DeletedAt
     deletedAt: Date
+
+    @BelongsTo(() => Client)
+    client: Client
+
+    @BelongsTo(() => Room)
+    room: Room;
 }

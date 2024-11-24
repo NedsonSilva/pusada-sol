@@ -5,11 +5,13 @@ import {
     DataType,
     Default,
     DeletedAt,
+    HasMany,
     Model,
     PrimaryKey,
     Table,
     UpdatedAt,
 } from 'sequelize-typescript';
+import { Reservation } from './Reservation';
 
 
 @Table
@@ -46,4 +48,7 @@ export class Room extends Model<Room> {
 
     @DeletedAt
     deletedAt: Date
+
+    @HasMany(() => Reservation)
+    reservations: Reservation[]
 }

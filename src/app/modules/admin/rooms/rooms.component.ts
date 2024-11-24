@@ -1,24 +1,28 @@
-import { ChangeDetectorRef, Component, OnInit, signal, Signal } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, Signal, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { ZuziConfirmService } from '@zuzi/services/confirm';
 import { ToastService } from 'angular-toastify';
-import { Client, ClientFilter, ClientPaginate } from 'app/services/clients/clients.types';
-import { ClientService } from 'app/services/clients/reservation.service';
+import { Client } from 'app/services/clients/clients.types';
+import { RoomService } from 'app/services/Rooms/room.service';
+import { Room, RoomFilter, RoomPaginate } from 'app/services/Rooms/rooms.types';
+
+import { RoomFormComponent } from './form/form.component';
 
 @Component({
     templateUrl: './rooms.component.html',
     styleUrl: './rooms.component.scss',
 })
 export class RoomsComponent implements OnInit {
-    clients: Signal<ClientPaginate> = toSignal(this.service.clients$);
-    filter = new ClientFilter();
+    clients: Signal<RoomPaginate> = toSignal(this.service.data$);
+    filter = new RoomFilter();
     displayedColumns: string[] = ['id', 'name', 'createdAt', 'action'];
     loading = signal(false);
 
+
     constructor(
-        private service: ClientService,
+        private service: RoomService,
         private confirmService: ZuziConfirmService,
         private dialog: MatDialog,
         private toastService: ToastService,
@@ -26,10 +30,10 @@ export class RoomsComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this.getClients();
+        this.getRooms();
     }
 
-    getClients() {
+    getRooms() {
         if (this.loading()) return;
 
         this.loading.set(true);
@@ -56,20 +60,38 @@ export class RoomsComponent implements OnInit {
         )
     }
 
-    openModalFormClient(contact?: Client) {
-        // this.dialog.open(ContactsFormComponent, {
-        //     data: contact,
-        //     autoFocus: true
-        // })
+    openFormRoom(item?: Room) {
+        this.dialog.open(RoomFormComponent, {
+            data: { room: { ...item } },
+            maxWidth: '95vw',
+            maxHeight: '85vh',
+            autoFocus: true
+        })
+    }
+
+    remove(room: Room) {
+        this.confirmService.open(
+            {
+                message: 'Tem certeza que deseja excluir?',
+                title: 'Excluir Quarto',
+
+            },
+            () => {
+                this.loading.set(true)
+                this.service.delete(room.id).subscribe({
+                    next: () => {
+                        this.toastService.success('Quarto excluido com sucesso');
+                        this.loading.set(false);
+                    },
+                    error: () => this.loading.set(false),
+                });
+            }
+        )
     }
 
     setPage(event: PageEvent) {
         this.filter.pageNumber = event.pageIndex + 1;
         this.filter.perPage = event.pageSize;
-        this.getClients();
-    }
-
-    trackByFn(data) {
-        return data.id
+        this.getRooms();
     }
 }

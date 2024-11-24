@@ -1,5 +1,6 @@
 import {
     AutoIncrement,
+    BelongsTo,
     Column,
     CreatedAt,
     DataType,
@@ -11,10 +12,9 @@ import {
     Table,
     UpdatedAt,
 } from 'sequelize-typescript';
-import { Client } from './Client';
-import { Room } from './Room';
-import { Reservation } from './Reservation';
 
+import { Reservation } from './Reservation';
+import { Room } from './Room';
 
 @Table
 export class Payment extends Model<Payment> {
@@ -54,5 +54,11 @@ export class Payment extends Model<Payment> {
     updatedAt: Date;
 
     @DeletedAt
-    deletedAt: Date
+    deletedAt: Date;
+
+    @BelongsTo(() => Reservation)
+    reservation: Reservation;
+
+    @BelongsTo(() => Room)
+    room: Room;
 }

@@ -23,5 +23,5 @@ export const DeleteUserService = async (id: string | number): Promise<void> => {
         }
     }
 
-    await user.destroy();
+    await user.destroy({ force: true });
 };

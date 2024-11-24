@@ -6,14 +6,15 @@ import {
     Column,
     CreatedAt,
     DataType,
-    Default,
     DeletedAt,
+    HasMany,
     Model,
     PrimaryKey,
     Table,
     UpdatedAt,
 } from 'sequelize-typescript';
 
+import { Reservation } from './Reservation';
 
 @Table
 export class Client extends Model<Client> {
@@ -38,7 +39,7 @@ export class Client extends Model<Client> {
     cpfCnpj: string;
 
     @Column
-    gender: string
+    gender: string;
 
     @Column(DataType.DATEONLY)
     birthDate: Date;
@@ -74,7 +75,10 @@ export class Client extends Model<Client> {
     updatedAt: Date;
 
     @DeletedAt
-    deletedAt: Date
+    deletedAt: Date;
+
+    @HasMany(() => Reservation)
+    reservations: Reservation[];
 
     @BeforeUpdate
     @BeforeCreate
