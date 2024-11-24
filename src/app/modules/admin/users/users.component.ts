@@ -46,6 +46,7 @@ export class UsersComponent extends ListBase<User, UserFilter, UsersService> {
                 this.loading.set(true)
                 this.service.delete(User.id).subscribe({
                     next: () => {
+                        this.toastService.success('Usuário excluido com sucesso');
                         this.loading.set(false);
                     },
                     error: () => this.loading.set(false),

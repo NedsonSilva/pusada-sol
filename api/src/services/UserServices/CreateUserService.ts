@@ -18,7 +18,7 @@ interface Response {
     profile: number;
 }
 
-const CreateUserService = async ({
+export const CreateUserService = async ({
     email,
     password,
     name,
@@ -31,16 +31,17 @@ const CreateUserService = async ({
             .required()
             .test(
                 'Check-email',
-                'An user with this email already exists.',
+                'Já existe um usuário cadastro com esse e-mail',
                 async value => {
                     if (!value) return false;
-                    const emailExists = await User.findOne({
+                    const emailExists = await User.count({
                         where: { email: value }
                     });
                     return !emailExists;
                 }
             ),
-        password: Yup.string().required().min(5)
+        password: Yup.string().required('password é obrigatório').min(5),
+        profile: Yup.number().required('profile é obrigatório'),
     });
 
     try {
@@ -62,5 +63,3 @@ const CreateUserService = async ({
 
     return SerializeUser(user);
 };
-
-export default CreateUserService;

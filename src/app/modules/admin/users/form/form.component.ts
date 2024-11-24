@@ -29,14 +29,14 @@ export class UserFormComponent extends FormBase implements OnInit {
     }
 
     ngOnInit(): void {
-        if (this.data?.user) {
+        if (this.data?.user?.id) {
             this.form.patchValue({
                 ...this.data.user,
                 password: null,
             });
         } else {
             this.form.get('password').addValidators(Validators.required);
-            this.form.get('confirmPassword').setValidators(Validators.required);
+            this.form.get('password').updateValueAndValidity();
         }
     }
 
@@ -64,14 +64,27 @@ export class UserFormComponent extends FormBase implements OnInit {
         const formData = this.form.getRawValue();
 
         this.form.disable();
-        this.service.update(formData.id, formData).subscribe({
-            next: () => {
-                this.dialogRef.close();
-                this.actionsSuccess()
-            },
-            error: () => {
-                this.form.enable()
-            }
-        })
+
+        if (formData.id) {
+            this.service.update(formData.id, formData).subscribe({
+                next: () => {
+                    this.dialogRef.close();
+                    this.actionsSuccess()
+                },
+                error: () => {
+                    this.form.enable()
+                }
+            })
+        } else {
+            this.service.create(formData).subscribe({
+                next: () => {
+                    this.dialogRef.close();
+                    this.actionsSuccess()
+                },
+                error: () => {
+                    this.form.enable()
+                }
+            })
+        }
     }
 }

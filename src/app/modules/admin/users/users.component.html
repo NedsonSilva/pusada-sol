@@ -35,6 +35,9 @@
                             Visto por último
                         </th>
                         <th class="p-2 font-medium">
+                            Criado em
+                        </th>
+                        <th class="p-2 font-medium">
                             Ações
                         </th>
                     </tr>
@@ -49,10 +52,18 @@
                                 {{ user.email }}
                             </td>
                             <td class="px-2">
-                                {{ user.profile }}
+                                @if (user.profile === 10) {
+                                    Recepcionista
+                                }
+                                @else if (user.profile === 99) {
+                                    Administrador
+                                }
                             </td>
                             <td class="px-2">
                                 {{ (user.lastLogin|date:'dd/MM/y HH:mm') || 'Sem sessão iniciada' }}
+                            </td>
+                            <td class="px-2">
+                                {{ user.updatedAt|date:'dd/MM/y HH:mm' }}
                             </td>
                             <td class="px-2">
                                 <button [matMenuTriggerFor]="menuActions" mat-icon-button>

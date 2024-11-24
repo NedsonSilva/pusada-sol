@@ -8,6 +8,8 @@ export class UserBase {
     avatar?: string;
     status?: string;
     lastLogin?: string;
+    createdAt?: string;
+    updatedAt?: string;
 }
 
 export enum UserLevel {

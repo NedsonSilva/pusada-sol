@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 
 import AppError from '../errors/AppError';
-import CreateUserService from '../services/UserServices/CreateUserService';
+import { CreateUserService } from '../services/UserServices/CreateUserService';
 import { DeleteUserService } from '../services/UserServices/DeleteUserService';
 import ListUsersService from '../services/UserServices/ListUsersService';
 import ShowUserService from '../services/UserServices/ShowUserService';

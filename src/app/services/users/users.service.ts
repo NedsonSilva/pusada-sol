@@ -17,4 +17,10 @@ export class UsersService extends ServiceBase<User, UserFilter> {
             .put<User>(url, data)
             .pipe(tap((res) => this.upsertData(res)));
     }
+
+    create(data: Partial<User>): Observable<User> {
+        return this.http
+            .post<User>(this.urlBase, data)
+            .pipe(tap((res) => this.upsertData(res)));
+    }
 }

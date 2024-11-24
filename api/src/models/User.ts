@@ -44,6 +44,9 @@ class User extends Model<User> {
     @Column
     tokenVersion: number;
 
+    @Column
+    lastLogin: Date;
+
     @CreatedAt
     createdAt: Date;
 

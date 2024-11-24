@@ -12,6 +12,7 @@ import { ZuziConfirmService } from '@zuzi/services/confirm';
 import { ServiceBase } from './service.base';
 import { PaginateBase } from './paginate.types';
 import { PageEvent } from '@angular/material/paginator';
+import { ToastService } from 'angular-toastify';
 
 @Directive()
 export class ListBase<
@@ -26,6 +27,7 @@ export class ListBase<
     protected changeDetectorRef: ChangeDetectorRef;
     protected searchTimeoutRef: NodeJS.Timeout;
     protected confirmService: ZuziConfirmService;
+    protected toastService: ToastService;
 
     protected _unsubAll = new Subject();
 
@@ -38,6 +40,7 @@ export class ListBase<
         this.confirmService = injector.get(ZuziConfirmService);
         this.changeDetectorRef = injector.get(ChangeDetectorRef);
         this.service.filter = this.filter;
+        this.toastService = injector.get(ToastService);
     }
 
     ngOnInit(): void {

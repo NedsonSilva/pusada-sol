@@ -42,6 +42,10 @@ const AuthUserService = async ({
 
     const serializedUser = SerializeUser(user);
 
+    await user.update({
+        lastLogin: new Date()
+    })
+
     return {
         serializedUser,
         token,
