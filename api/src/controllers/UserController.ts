@@ -1,9 +1,8 @@
 import { Request, Response } from 'express';
 
 import AppError from '../errors/AppError';
-import { getIO } from '../libs/socket';
 import CreateUserService from '../services/UserServices/CreateUserService';
-import DeleteUserService from '../services/UserServices/DeleteUserService';
+import { DeleteUserService } from '../services/UserServices/DeleteUserService';
 import ListUsersService from '../services/UserServices/ListUsersService';
 import ShowUserService from '../services/UserServices/ShowUserService';
 import UpdateUserService from '../services/UserServices/UpdateUserService';
@@ -40,12 +39,6 @@ export const store = async (req: Request, res: Response): Promise<Response> => {
         profile,
     });
 
-    const io = getIO();
-    io.emit('user', {
-        action: 'create',
-        user,
-    });
-
     return res.status(200).json(user);
 };
 
@@ -70,13 +63,7 @@ export const update = async (
 
     const user = await UpdateUserService({
         userData,
-        userId: +userId
-    });
-
-    const io = getIO();
-    io.emit('user', {
-        action: 'update',
-        user,
+        userId: +userId,
     });
 
     return res.status(200).json(user);
@@ -88,17 +75,11 @@ export const remove = async (
 ): Promise<Response> => {
     const { userId } = req.params;
 
-    if (req.user.profile !== 50) {
-        throw new AppError('ERR_NO_PERMISSION', 403);
+    if (req.user.profile !== 99) {
+        throw new AppError('Acesso negado', 403);
     }
 
     await DeleteUserService(userId);
 
-    const io = getIO();
-    io.emit('user', {
-        action: 'delete',
-        userId,
-    });
-
-    return res.status(200).json({ message: 'User deleted' });
+    return res.status(200).json({ message: 'Usuário excluído' });
 };

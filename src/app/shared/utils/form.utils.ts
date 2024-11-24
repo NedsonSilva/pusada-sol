@@ -27,3 +27,13 @@ export const focusControlInvalid = () => {
         input?.focus() || matFormField?.focus();
     });
 };
+
+
+export const estadoCivil = [
+    'Solteiro (a)',
+    'Casado (a)',
+    'Divorciado (a)',
+    'Viúvo (a)',
+    'Separado (a) judicialmente',
+    'Outros'
+];

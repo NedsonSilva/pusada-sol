@@ -11,7 +11,7 @@
                 </mat-form-field>
             </div>
             <div>
-                <split-button label="Adicionar usuário">
+                <split-button (onClick)="openFormUser()" label="Adicionar usuário">
 
                 </split-button>
             </div>
@@ -40,28 +40,34 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if (data?.data) {
-                        @for (user of data.data; track user.id) {
-                            <tr class="text-center hover:bg-hover transition">
-                                <td class="px-2">
-                                    {{ user.name }}
-                                </td>
-                                <td class="px-2">
-                                    {{ user.email }}
-                                </td>
-                                <td class="px-2">
-                                    {{ user.profile }}
-                                </td>
-                                <td class="px-2">
-                                    {{ user.lastLogin || 'sem acesso' }}
-                                </td>
-                                <td class="px-2">
-                                    <button mat-icon-button>
-                                        <mat-icon svgIcon="heroicons_outline:dots-vertical" class="text-current"></mat-icon>
+                    @for (user of data?.data; track user.id) {
+                        <tr class="text-center hover:bg-hover transition">
+                            <td class="px-2">
+                                {{ user.name }}
+                            </td>
+                            <td class="px-2">
+                                {{ user.email }}
+                            </td>
+                            <td class="px-2">
+                                {{ user.profile }}
+                            </td>
+                            <td class="px-2">
+                                {{ (user.lastLogin|date:'dd/MM/y HH:mm') || 'Sem sessão iniciada' }}
+                            </td>
+                            <td class="px-2">
+                                <button [matMenuTriggerFor]="menuActions" mat-icon-button>
+                                    <mat-icon svgIcon="heroicons_outline:dots-vertical" class="text-current"></mat-icon>
+                                </button>
+                                <mat-menu #menuActions>
+                                    <button (click)="openFormUser(user)" mat-menu-item>
+                                        <span class="font-medium">Editar</span>
                                     </button>
-                                </td>
-                            </tr>
-                        }
+                                    <button (click)="remove(user)" mat-menu-item>
+                                        <span class="font-medium text-warn">Excluir</span>
+                                    </button>
+                                </mat-menu>
+                            </td>
+                        </tr>
                     }
                 </tbody>
             </table>
@@ -71,7 +77,8 @@
                 class="bg-card font-medium"
                 [length]="data?.count"
                 [showFirstLastButtons]="true"
-                [pageSizeOptions]="[20, 40, 80]"
+                [pageSizeOptions]="[20]"
+                [hidePageSize]="true"
                 (page)="chnagePage($event)"
                 [pageSize]="filter.perPage">
             </mat-paginator>

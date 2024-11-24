@@ -1,0 +1,89 @@
+<mat-form-field [class]="'w-full app-input zuzi-mat-dense' + class" floatLabel="always">
+    <mat-label *ngIf="label" [class]="classLabel"> {{ label }} </mat-label>
+    @if (!textMask && !_currencyMask) {
+        <input
+            matInput
+            [ngModel]="value"
+            (ngModelChange)="setValue($event);"
+            [type]="type"
+            [errorStateMatcher]="matcher()"
+            (blur)="markAsTouched()"
+            (paste)="handlePaste($event)"
+            [required]="isRequired"
+            [disabled]="ngControl?.disabled"
+            [placeholder]="placeholder"
+            [readonly]="readonly"
+            [min]="min"
+            [max]="max"
+            [attr.inputmode]="inputMode"
+            [autocomplete]="autocomplete"
+        >
+    }
+    @if (textMask) {
+        <input
+            matInput
+            [ngModel]="value"
+            (ngModelChange)="setValue($event);"
+            [type]="type"
+            [errorStateMatcher]="matcher()"
+            (paste)="handlePaste($event)"
+            (blur)="markAsTouched()"
+            [required]="isRequired"
+            [disabled]="ngControl.disabled"
+            [readonly]="readonly"
+            inputMask
+            [mask]="mask"
+            [placeholder]="placeholder"
+            [autocomplete]="autocomplete"
+        >
+    }
+    @if (_currencyMask) {
+        <input
+            matInput
+            currencyMask
+            [ngModel]="value"
+            (ngModelChange)="setValue($event)"
+            [attr.inputmode]="inputMode || 'decimal'"
+            [disabled]="ngControl.disabled"
+            [errorStateMatcher]="matcher()"
+            [class.error]="hasError()"
+            (blur)="markAsTouched()"
+            [placeholder]="placeholder"
+            [type]="type"
+            [required]="isRequired"
+            [readonly]="readonly"
+            [options]="_currencyMask"
+            [autocomplete]="autocomplete"
+        />
+    }
+    @if (iconPrefix === 'matPrefix' || (icon && iconPrefix !== 'matSuffix')) {
+        <mat-icon class="icon-size-5" [svgIcon]="icon" matPrefix>
+            <ng-content select="[fontIcon]"></ng-content>
+        </mat-icon>
+    }
+    @if (iconPrefix === 'matSuffix') {
+        <mat-icon class="icon-size" [svgIcon]="icon" matSuffix>
+            <ng-content select="[fontIcon]"></ng-content>
+        </mat-icon>
+    }
+
+    <mat-error *ngIf="hasError()">
+        {{ errorMessage() }}
+    </mat-error>
+
+    @if (isPwd) {
+        <button
+            mat-icon-button
+            class="icon-size-5 group mr-2"
+            type="button"
+            (click)="type === 'password' ? type = 'text' : type = 'password'"
+            matSuffix
+        >
+            <mat-icon
+                class="icon-size-5 group-hover:text-primary group-focus:text-primary transition"
+                [svgIcon]="getIconEye()"
+                matSuffix
+            ></mat-icon>
+        </button>
+    }
+</mat-form-field>

@@ -1,7 +1,7 @@
 import { FilterBase } from 'app/models/base/filter.base';
 
 export class UserBase {
-    id: string;
+    id: number;
     name: string;
     email: string;
     profile: UserLevel;

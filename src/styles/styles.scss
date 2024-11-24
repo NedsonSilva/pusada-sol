@@ -83,3 +83,8 @@ body.light {
         color: #ffff;
     }
 }
+
+// Remove default autofill color
+input:-webkit-autofill, textarea:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px var(--zuzi-bg-default) inset !important;
+}

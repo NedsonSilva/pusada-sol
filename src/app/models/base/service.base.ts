@@ -69,7 +69,6 @@ export abstract class ServiceBase<T extends Data, F extends FilterBase> {
                     dataArray.data.splice(index, 1);
                     dataArray.count--;
                     this._data.next(dataArray);
-                    console.log('removed', dataArray)
                 }
             })
         );

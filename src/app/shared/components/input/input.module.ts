@@ -1,25 +1,28 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
-import { InputModule } from './components/input/input.module';
+import { NgxCurrencyDirective } from 'ngx-currency';
+import { NgxMaskDirective } from 'ngx-mask';
+
+import { InputComponent } from './input.component';
 
 @NgModule({
-    imports: [FormsModule, ReactiveFormsModule, CommonModule],
-    exports: [
-        FormsModule,
-        ReactiveFormsModule,
+    declarations: [InputComponent],
+    imports: [
         CommonModule,
+        FormsModule,
         MatFormFieldModule,
-        MatButtonModule,
         MatInputModule,
-        MatSelectModule,
         MatIconModule,
-        InputModule
+        MatButtonModule,
+        NgxCurrencyDirective,
+        NgxMaskDirective,
     ],
+    providers: [],
+    exports: [InputComponent],
 })
-export class FormSharedModule {}
+export class InputModule {}

@@ -50,7 +50,7 @@ export class ListBase<
     }
 
     getAll() {
-        if (this.loading) return;
+        if (this.loading()) return;
 
         this.loading.set(true);
 

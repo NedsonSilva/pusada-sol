@@ -9,11 +9,13 @@ import { MAT_SLIDE_TOGGLE_DEFAULT_OPTIONS, MatSlideToggleDefaultOptions } from '
 import { provideClientHydration } from '@angular/platform-browser';
 
 import { MatCustomPaginatorIntl } from './modules/providers/mat-custom-paginator-intl';
+import { provideEnvironmentNgxMask } from 'ngx-mask';
 
 registerLocaleData(localePt);
 
 export const APP_PROVIDERS: (Provider | EnvironmentProviders)[] = [
     provideClientHydration(),
+    provideEnvironmentNgxMask(),
     { provide: LOCALE_ID, useValue: 'pt-BR' },
     { provide: DEFAULT_CURRENCY_CODE, useValue: 'BRL' },
     {

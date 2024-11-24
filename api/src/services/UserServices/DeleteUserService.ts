@@ -1,9 +1,10 @@
 import AppError from '../../errors/AppError';
 import User from '../../models/User';
 
-const DeleteUserService = async (id: string | number): Promise<void> => {
+export const DeleteUserService = async (id: string | number): Promise<void> => {
     const user = await User.findOne({
-        where: { id }
+        where: { id },
+        attributes: ['id'],
     });
 
     if (!user) {
@@ -12,5 +13,3 @@ const DeleteUserService = async (id: string | number): Promise<void> => {
 
     await user.destroy();
 };
-
-export default DeleteUserService;

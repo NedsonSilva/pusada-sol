@@ -48,7 +48,7 @@ export abstract class FormBase implements OnDestroy {
         this.loading = false;
         const prefix = this.form.value?.id ? 'Salvo' : 'Criado';
         this.form.enable();
-        // Notify.success(`${prefix} com sucesso`);
+        this.toastService.success(`${prefix} com sucesso`);
     }
 
     setLoading(value: boolean) {
