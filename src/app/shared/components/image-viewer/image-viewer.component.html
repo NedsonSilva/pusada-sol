@@ -1,0 +1,95 @@
+<div class="img-container" [style.backgroundColor]="config().containerBackgroundColor" (wheel)="scrollZoom($event)">
+    @if (imageName()) {
+        <div class="image-name">
+            <span>{{ imageName() }}</span>
+        </div>
+    }
+
+    <div cdkDrag class="drag-element">
+        <img
+            [src]="src[index()]"
+            [ngStyle]="style"
+            alt=""
+            (cdkDragStarted)="onDragStart($event)"
+            (load)="onLoad()"
+            (loadstart)="onLoadStart()" (error)="imageNotFound()"
+        />
+    </div>
+
+    @if (loading()) {
+        <div class="spinner-container">
+            <div class="spinner"></div>
+        </div>
+    }
+
+    <div class="button-container">
+        <div class="button-container-bottom">
+            @for (cBtn of config().customBtns; track cBtn) {
+                <button type="button" [class]="config().btnClass"
+                    [style.color]="config().primaryColor" (click)="fireCustomEvent(cBtn.name, index())">
+                    <span [class]="cBtn.icon"></span>
+                </button>
+            }
+
+            @if (config().btnShow?.rotateCounterClockwise) {
+                <button type="button" mat-icon-button class="icon-size-8 bg-hover" (click)="rotateCounterClockwise()">
+                    <mat-icon svgIcon="mat_solid:rotate_left"></mat-icon>
+                </button>
+            }
+            @if (config().btnShow?.rotateClockwise) {
+                <button type="button" mat-icon-button class="icon-size-8 bg-hover" (click)="rotateClockwise()">
+                    <mat-icon svgIcon="mat_solid:rotate_right"></mat-icon>
+                </button>
+            }
+
+            <div class="button-zoom-in-out-container">
+                @if (config().btnShow?.zoomIn) {
+                    <button type="button" mat-icon-button class="icon-size-8 bg-hover" (click)="zoomIn()">
+                        <mat-icon svgIcon="heroicons_outline:plus"></mat-icon>
+                    </button>
+                }
+                @if (config().btnShow?.zoomOut) {
+                    <button type="button" mat-icon-button class="icon-size-8 bg-hover" (click)="zoomOut()">
+                        <mat-icon svgIcon="heroicons_outline:minus"></mat-icon>
+                    </button>
+                }
+            </div>
+        </div>
+    </div>
+
+    @if (src.length > 1) {
+        <div class="nav-button-container">
+            <button
+                type="button"
+                #prevImg
+                [class]="config().btnClass"
+                (click)="prevImage($event); prevImg.blur()"
+                [style.color]="config().primaryColor"
+                [disabled]="index() === 0">
+                <span [class]="config().btnIcons?.prev"></span>
+            </button>
+            <button
+                type="button"
+                #nextImg
+                [class]="config().btnClass"
+                (click)="nextImage($event); nextImg.blur()"
+                [style.color]="config().primaryColor"
+                [disabled]="index() === src.length - 1">
+                <span [class]="config().btnIcons?.next"></span>
+            </button>
+        </div>
+    }
+    <div class="footer-section">
+        <div class="image-txt-count-left-align">
+            <span>
+                {{ footerTexts[0] }}{{ index() + 1 }} {{ footerTexts[1] }} {{ src.length }}
+            </span>
+        </div>
+        <div class="footer-txt-right-align">
+            <span class="footer-txt-right-align-title" [style.color]="config().primaryColor">{{footerTexts[2]}}</span>
+            <span class="footer-txt-right-align-note">
+                {{ footerTexts[3] }}
+            </span>
+        </div>
+    </div>
+</div>

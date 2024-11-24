@@ -1,0 +1,38 @@
+<div class="sm:min-w-140 md:min-w-200 max-w-screen-md min-h-40 bg-default p-5">
+    <div class="w-full">
+        <h1 class="text-xl text-primary font-semibold">
+            {{ contact ? 'Editar' : 'Adicionar' }} contato
+        </h1>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="submitForm()" class="mt-10">
+        <div class="flex flex-col gap-2">
+            <mat-form-field class="w-full zuzi-mat-dense">
+                <mat-label>Nome</mat-label>
+                <input matInput formControlName="name">
+            </mat-form-field>
+            <mat-form-field class="w-full zuzi-mat-dense">
+                <mat-label>Telefone</mat-label>
+                <input matInput type="tel" formControlName="phone">
+            </mat-form-field>
+            <mat-form-field class="w-full zuzi-mat-dense">
+                <mat-label>E-mail</mat-label>
+                <input matInput type="email" formControlName="email">
+            </mat-form-field>
+        </div>
+        <div class="w-full mt-10 mb-5 border-t"></div>
+        <div class="flex justify-end gap-2">
+            <button type="button" mat-button mat-dialog-close color="warn">
+                Cancelar
+            </button>
+            <button mat-flat-button color="primary" [disabled]="form.disabled">
+                {{ contact ? 'Salvar' : 'Adicionar' }}
+                @if (form.disabled) {
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+                    </div>
+                }
+            </button>
+        </div>
+    </form>
+</div>

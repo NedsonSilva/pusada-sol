@@ -1,0 +1,71 @@
+<div class="absolute inset-0 flex flex-col p-2.5 min-w-0 overflow-hidden">
+    <div class="flex gap-5 items-center justify-between p-2 pb-4">
+        <div class="grow-[2]">
+            <h1 class="text-3xl text-primary font-medium">Quartos</h1>
+        </div>
+        <div class="grow flex items-center gap-5 max-w-120">
+            <div class="grow">
+                <mat-form-field class="w-full zuzi-mat-no-subscript zuzi-mat-dense">
+                    <mat-icon matIconPrefix svgIcon="mat_outline:search"></mat-icon>
+                    <input matInput placeholder="Pesquisar">
+                </mat-form-field>
+            </div>
+            <div>
+                <split-button label="Adicionar Quarto" [showIconMenu]="false" (onClick)="openModalFormClient()">
+                </split-button>
+            </div>
+        </div>
+    </div>
+    <div class="flex flex-col flex-auto overflow-hidden border shadow-md bg-card h-full relative">
+        <div class="w-full overflow-x-auto">
+            <div class="w-full overflow-x-auto">
+                <table class="w-full table-auto">
+                    <thead>
+                        <tr class="border-b">
+                            <th class="p-2 whitespace-nowrap">
+                                Id
+                            </th>
+                            <th class="p-2 whitespace-nowrap">
+                                Nome
+                            </th>
+                            <th class="p-2 whitespace-nowrap">
+                                Telefone
+                            </th>
+                            <th class="p-2 whitespace-nowrap">
+                                E-mail
+                            </th>
+                            <th class="p-2 whitespace-nowrap">
+                                Cpf
+                            </th>
+                            <th class="p-2 whitespace-nowrap">
+                                Endereço
+                            </th>
+                            <th class="p-2 whitespace-nowrap">
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (item of clients()?.data; track item.id) {
+                            <tr class="border-b">
+                                <td class="p-2 whitespace-nowrap">
+
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="mt-auto">
+            <mat-paginator
+                class="bg-card font-medium"
+                [length]="clients()?.count"
+                [pageIndex]="filter.pageNumber - 1"
+                [showFirstLastButtons]="true"
+                [disabled]="loading()"
+                (page)="setPage($event)"
+                [pageSizeOptions]="[20]"
+                [hidePageSize]="true">
+            </mat-paginator>
+        </div>
+    </div>
+</div>

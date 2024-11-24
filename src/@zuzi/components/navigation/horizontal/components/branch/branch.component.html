@@ -1,0 +1,119 @@
+@if (!child) {
+    <div
+        [ngClass]="{'zuzi-horizontal-navigation-menu-active': trigger.menuOpen,
+                'zuzi-horizontal-navigation-menu-active-forced': item.active}"
+        [matMenuTriggerFor]="matMenu"
+        (onMenuOpen)="triggerChangeDetection()"
+        (onMenuClose)="triggerChangeDetection()"
+        #trigger="matMenuTrigger">
+        <ng-container *ngTemplateOutlet="itemTemplate; context: {$implicit: item}"></ng-container>
+    </div>
+}
+
+<mat-menu
+    class="zuzi-horizontal-navigation-menu-panel"
+    [overlapTrigger]="false"
+    #matMenu="matMenu">
+
+    @for (item of item.children; track item.id) {
+        <!-- Skip the hidden items -->
+        <ng-container *ngIf="(item.hidden && !item.hidden(item)) || !item.hidden">
+
+            <!-- Basic -->
+            <ng-container *ngIf="item.type === 'basic'">
+                <div
+                    class="zuzi-horizontal-navigation-menu-item"
+                    [disabled]="item.disabled"
+                    mat-menu-item>
+                    <zuzi-horizontal-navigation-basic-item
+                        [item]="item"
+                        [name]="name"></zuzi-horizontal-navigation-basic-item>
+                </div>
+            </ng-container>
+
+            <!-- Branch: aside, collapsable, group -->
+            <ng-container *ngIf="item.type === 'aside' || item.type === 'collapsable' || item.type === 'group'">
+                <div
+                    class="zuzi-horizontal-navigation-menu-item"
+                    [disabled]="item.disabled"
+                    [matMenuTriggerFor]="branch.matMenu"
+                    mat-menu-item>
+                    <ng-container *ngTemplateOutlet="itemTemplate; context: {$implicit: item}"></ng-container>
+                    <zuzi-horizontal-navigation-branch-item
+                        [child]="true"
+                        [item]="item"
+                        [name]="name"
+                        #branch></zuzi-horizontal-navigation-branch-item>
+                </div>
+            </ng-container>
+
+            <!-- Divider -->
+            <ng-container *ngIf="item.type === 'divider'">
+                <div
+                    class="zuzi-horizontal-navigation-menu-item"
+                    mat-menu-item>
+                    <zuzi-horizontal-navigation-divider-item
+                        [item]="item"
+                        [name]="name"></zuzi-horizontal-navigation-divider-item>
+                </div>
+            </ng-container>
+
+        </ng-container>
+    }
+
+</mat-menu>
+
+<!-- Item template -->
+<ng-template
+    let-item
+    #itemTemplate>
+
+    <div
+        class="zuzi-horizontal-navigation-item-wrapper"
+        [class.zuzi-horizontal-navigation-item-has-subtitle]="!!item.subtitle"
+        [ngClass]="item.classes?.wrapper">
+
+        <div
+            class="zuzi-horizontal-navigation-item"
+            [ngClass]="{'zuzi-horizontal-navigation-item-disabled': item.disabled,
+                         'zuzi-horizontal-navigation-item-active-forced': item.active}"
+            [matTooltip]="item.tooltip || ''">
+
+            <!-- Icon -->
+            <ng-container *ngIf="item.icon">
+                <mat-icon
+                    class="zuzi-horizontal-navigation-item-icon"
+                    [ngClass]="item.classes?.icon"
+                    [svgIcon]="item.icon"></mat-icon>
+            </ng-container>
+
+            <!-- Title & Subtitle -->
+            <div class="zuzi-horizontal-navigation-item-title-wrapper">
+                <div class="zuzi-horizontal-navigation-item-title">
+                    <span [ngClass]="item.classes?.title">
+                        {{item.title}}
+                    </span>
+                </div>
+                <ng-container *ngIf="item.subtitle">
+                    <div class="zuzi-horizontal-navigation-item-subtitle text-hint">
+                        <span [ngClass]="item.classes?.subtitle">
+                            {{item.subtitle}}
+                        </span>
+                    </div>
+                </ng-container>
+            </div>
+
+            <!-- Badge -->
+            <ng-container *ngIf="item.badge">
+                <div class="zuzi-horizontal-navigation-item-badge">
+                    <div
+                        class="zuzi-horizontal-navigation-item-badge-content"
+                        [ngClass]="item.badge.classes">
+                        {{item.badge.title}}
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+
+</ng-template>

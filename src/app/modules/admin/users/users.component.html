@@ -1,0 +1,80 @@
+<div class="absolute inset-0 flex flex-col p-2.5 min-w-0 overflow-hidden">
+    <div class="flex flex-col md:flex-row gap-5 md:items-center justify-between p-2 pb-4">
+        <div class="grow-[2]">
+            <h1 class="text-2xl text-primary font-medium">Usuários</h1>
+        </div>
+        <div class="grow flex items-center gap-5 md:max-w-120">
+            <div class="grow">
+                <mat-form-field class="w-full zuzi-mat-no-subscript zuzi-mat-dense">
+                    <mat-icon matIconPrefix svgIcon="mat_outline:search"></mat-icon>
+                    <input matInput placeholder="Pesquisar">
+                </mat-form-field>
+            </div>
+            <div>
+                <split-button label="Adicionar usuário">
+
+                </split-button>
+            </div>
+        </div>
+    </div>
+    <div class="flex flex-col flex-auto overflow-hidden border shadow-md bg-card h-full">
+        <div class="w-full overflow-x-auto">
+            <table class="table-autos w-full">
+                <thead>
+                    <tr class="border-b">
+                        <th class="p-2 font-medium">
+                            Nome
+                        </th>
+                        <th class="p-2 font-medium">
+                            E-mail
+                        </th>
+                        <th class="p-2 font-medium">
+                            Perfil
+                        </th>
+                        <th class="p-2 font-medium">
+                            Visto por último
+                        </th>
+                        <th class="p-2 font-medium">
+                            Ações
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (data?.data) {
+                        @for (user of data.data; track user.id) {
+                            <tr class="text-center hover:bg-hover transition">
+                                <td class="px-2">
+                                    {{ user.name }}
+                                </td>
+                                <td class="px-2">
+                                    {{ user.email }}
+                                </td>
+                                <td class="px-2">
+                                    {{ user.profile }}
+                                </td>
+                                <td class="px-2">
+                                    {{ user.lastLogin || 'sem acesso' }}
+                                </td>
+                                <td class="px-2">
+                                    <button mat-icon-button>
+                                        <mat-icon svgIcon="heroicons_outline:dots-vertical" class="text-current"></mat-icon>
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="mt-auto">
+            <mat-paginator
+                class="bg-card font-medium"
+                [length]="data?.count"
+                [showFirstLastButtons]="true"
+                [pageSizeOptions]="[20, 40, 80]"
+                (page)="chnagePage($event)"
+                [pageSize]="filter.perPage">
+            </mat-paginator>
+        </div>
+    </div>
+</div>

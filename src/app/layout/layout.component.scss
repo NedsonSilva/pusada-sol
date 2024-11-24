@@ -1,0 +1,31 @@
+layout {
+    display: flex;
+    flex: 1 1 auto;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+
+    > * {
+        position: relative;
+        display: flex;
+        flex: 1 1 auto;
+        width: 100%;
+    }
+
+    dense-layout {
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    /* Base styles for components that load as a route */
+    router-outlet {
+
+        + * {
+            position: relative;
+            display: flex;
+            flex: 1 1 auto;
+            width: 100%;
+        }
+    }
+}

@@ -1,0 +1,106 @@
+<div
+    class="zuzi-vertical-navigation-item-wrapper"
+    [class.zuzi-vertical-navigation-item-has-subtitle]="!!item.subtitle"
+    [ngClass]="item.classes?.wrapper">
+
+    <div
+        class="zuzi-vertical-navigation-item"
+        [ngClass]="{'zuzi-vertical-navigation-item-disabled': item.disabled}"
+        [matTooltip]="item.tooltip || ''"
+        (click)="toggleCollapsable()">
+
+        <!-- Icon -->
+        @if (item.icon) {
+            <mat-icon
+                class="zuzi-vertical-navigation-item-icon"
+                [ngClass]="item.classes?.icon"
+                [svgIcon]="item.icon"></mat-icon>
+        }
+
+        <!-- Title & Subtitle -->
+        <div class="zuzi-vertical-navigation-item-title-wrapper">
+            <div class="zuzi-vertical-navigation-item-title">
+                <span [ngClass]="item.classes?.title">
+                    {{item.title}}
+                </span>
+            </div>
+            <ng-container *ngIf="item.subtitle">
+                <div class="zuzi-vertical-navigation-item-subtitle">
+                    <span [ngClass]="item.classes?.subtitle">
+                        {{item.subtitle}}
+                    </span>
+                </div>
+            </ng-container>
+        </div>
+
+        <!-- Badge -->
+        <ng-container *ngIf="item.badge">
+            <div class="zuzi-vertical-navigation-item-badge">
+                <div
+                    class="zuzi-vertical-navigation-item-badge-content"
+                    [ngClass]="item.badge.classes">
+                    {{item.badge.title}}
+                </div>
+            </div>
+        </ng-container>
+
+        <!-- Arrow -->
+        <mat-icon
+            class="zuzi-vertical-navigation-item-arrow icon-size-4"
+            [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+
+    </div>
+
+</div>
+
+<div
+    class="zuzi-vertical-navigation-item-children"
+    *ngIf="!isCollapsed"
+    @expandCollapse>
+
+    <ng-container *ngFor="let item of item.children; trackBy: trackByFn">
+
+        <!-- Skip the hidden items -->
+        <ng-container *ngIf="(item.hidden && !item.hidden(item)) || !item.hidden">
+
+            <!-- Basic -->
+            <ng-container *ngIf="item.type === 'basic'">
+                <zuzi-vertical-navigation-basic-item
+                    [item]="item"
+                    [name]="name"></zuzi-vertical-navigation-basic-item>
+            </ng-container>
+
+            <!-- Collapsable -->
+            <ng-container *ngIf="item.type === 'collapsable'">
+                <zuzi-vertical-navigation-collapsable-item
+                    [item]="item"
+                    [name]="name"
+                    [autoCollapse]="autoCollapse"></zuzi-vertical-navigation-collapsable-item>
+            </ng-container>
+
+            <!-- Divider -->
+            <ng-container *ngIf="item.type === 'divider'">
+                <zuzi-vertical-navigation-divider-item
+                    [item]="item"
+                    [name]="name"></zuzi-vertical-navigation-divider-item>
+            </ng-container>
+
+            <!-- Group -->
+            <ng-container *ngIf="item.type === 'group'">
+                <zuzi-vertical-navigation-group-item
+                    [item]="item"
+                    [name]="name"></zuzi-vertical-navigation-group-item>
+            </ng-container>
+
+            <!-- Spacer -->
+            <ng-container *ngIf="item.type === 'spacer'">
+                <zuzi-vertical-navigation-spacer-item
+                    [item]="item"
+                    [name]="name"></zuzi-vertical-navigation-spacer-item>
+            </ng-container>
+
+        </ng-container>
+
+    </ng-container>
+
+</div>

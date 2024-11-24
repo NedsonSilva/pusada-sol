@@ -1,0 +1,11 @@
+<li class="w-full">
+    <button
+        type="button"
+        (click)="handleClick()"
+        [disabled]="disabled"
+        class="block w-full p-3 px-4 hover:bg-primary text-default hover:text-white cursor-pointer font-medium transition truncate text-center">
+        <span>
+            <ng-content></ng-content>
+        </span>
+    </button>
+</li>

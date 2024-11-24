@@ -1,0 +1,44 @@
+/* ----------------------------------------------------------------------------------------------------- */
+/*  @ Import third party library styles here.
+/* ----------------------------------------------------------------------------------------------------- */
+
+/* Perfect scrollbar */
+@import '../../node_modules/perfect-scrollbar/css/perfect-scrollbar.css';
+
+/* Quill */
+@import '../../node_modules/quill/dist/quill.snow.css';
+
+@import '@ctrl/ngx-emoji-mart/picker';
+
+.emoji-mart-dark {
+    @apply bg-default border-none #{'!important'};
+
+    .emoji-mart-bar {
+        @apply border-none bg-none #{'!important'};
+    }
+
+    .emoji-mart-category-label span {
+        @apply bg-default #{'!important'};
+    }
+
+    .emoji-mart-search input {
+        @apply bg-default border-gray-300 dark:border-transparent #{'!important'};
+    }
+
+
+    .emoji-mart-category .emoji-mart-emoji:hover:before {
+        @apply hover:bg-hover #{'!important'};
+    }
+
+    .emoji-mart-category .emoji-mart-emoji span {
+        @apply cursor-pointer #{'!important'};
+    }
+
+    .emoji-mart-search input {
+        @apply text-default #{'!important'};
+    }
+
+}
+.emoji-mart-anchor {
+    @apply flex justify-center cursor-pointer #{'!important'};
+}

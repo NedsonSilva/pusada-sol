@@ -1,0 +1,152 @@
+{
+    "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+    "version": 1,
+    "cli": {
+        "schematicCollections": [
+            "@angular-eslint/schematics"
+        ]
+    },
+    "newProjectRoot": "projects",
+    "projects": {
+        "zuzi": {
+            "projectType": "application",
+            "schematics": {
+                "@schematics/angular:component": {
+                    "style": "scss"
+                }
+            },
+            "root": "",
+            "sourceRoot": "src",
+            "prefix": "app",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:application",
+                    "options": {
+                        "outputPath": "dist/zuzi",
+                        "index": "src/index.html",
+                        "browser": "src/main.ts",
+                        "polyfills": ["zone.js"],
+                        "tsConfig": "tsconfig.app.json",
+                        "inlineStyleLanguage": "scss",
+                        "allowedCommonJsDependencies": [
+                            "apexcharts",
+                            "highlight.js",
+                            "crypto-js/enc-utf8",
+                            "crypto-js/hmac-sha256",
+                            "crypto-js/enc-base64",
+                            "flat",
+                            "moment",
+                            "quill",
+                            "lodash",
+                            "qrcode"
+                        ],
+                        "assets": [
+                            "src/favicon-16x16.png",
+                            "src/favicon-32x32.png",
+                            "src/assets",
+                            {
+                                "glob": "_redirects",
+                                "input": "src",
+                                "output": "/"
+                            }
+                        ],
+                        "stylePreprocessorOptions": {
+                            "includePaths": [
+                                "src/@zuzi/styles"
+                            ]
+                        },
+                        "styles": [
+                            "src/@zuzi/styles/tailwind.scss",
+                            "src/@zuzi/styles/themes.scss",
+                            "src/styles/vendors.scss",
+                            "src/@zuzi/styles/main.scss",
+                            "simple-notify/dist/simple-notify.css",
+                            "src/styles/styles.scss",
+                            "src/styles/tailwind.scss"
+                        ],
+                        "scripts": []
+                    },
+                    "configurations": {
+                        "production": {
+                            "budgets": [
+                                {
+                                    "type": "initial",
+                                    "maximumWarning": "3mb",
+                                    "maximumError": "5mb"
+                                },
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "75kb",
+                                    "maximumError": "90kb"
+                                }
+                            ],
+                            "fileReplacements": [
+                                {
+                                    "replace": "src/environments/environment.ts",
+                                    "with": "src/environments/environment.prod.ts"
+                                }
+                            ],
+                            "outputHashing": "all"
+                        },
+                        "development": {
+                            "optimization": false,
+                            "extractLicenses": false,
+                            "sourceMap": true,
+                            "namedChunks": false
+                        }
+                    },
+                    "defaultConfiguration": "production"
+                },
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "configurations": {
+                        "production": {
+                          "buildTarget": "zuzi:build:production"
+                        },
+                        "development": {
+                          "buildTarget": "zuzi:build:development"
+                        }
+                    },
+                    "options": {
+                        "proxyConfig": "proxy.conf.json"
+                    },
+                    "defaultConfiguration": "development"
+                },
+                "extract-i18n": {
+                    "builder": "@angular-devkit/build-angular:extract-i18n",
+                    "options": {
+                      "buildTarget": "zuzi:build"
+                    }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "src/test.ts",
+                        "polyfills": "src/polyfills.ts",
+                        "tsConfig": "tsconfig.spec.json",
+                        "karmaConfig": "karma.conf.js",
+                        "inlineStyleLanguage": "scss",
+                        "assets": [
+                            "src/favicon-16x16.png",
+                            "src/favicon-32x32.png",
+                            "src/assets"
+                        ],
+                        "styles": [
+                            "src/styles/styles.scss"
+                        ],
+                        "scripts": []
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-eslint/builder:lint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "src/**/*.ts",
+                            "src/**/*.html"
+                        ]
+                    }
+                }
+            }
+        }
+    }
+}

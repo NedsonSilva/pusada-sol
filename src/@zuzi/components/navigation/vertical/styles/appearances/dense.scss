@@ -1,0 +1,195 @@
+/* Variables */
+:root {
+    --zuzi-vertical-nav-width: 280px;
+    --zuzi-vertical-nav-dense-width: 80px;
+}
+
+zuzi-vertical-nav {
+
+    /* Dense appearance overrides */
+    &.zuzi-vertical-navigation-appearance-dense {
+
+        &:not(.zuzi-vertical-navigation-mode-over) {
+            width: var(--zuzi-vertical-nav-dense-width);
+            min-width: var(--zuzi-vertical-nav-dense-width);
+            max-width: var(--zuzi-vertical-nav-dense-width);
+
+            /* Left positioned */
+            &.zuzi-vertical-navigation-position-left {
+
+                /* Side mode */
+                &.zuzi-vertical-navigation-mode-side {
+                    margin-left: calc(var(--zuzi-vertical-nav-dense-width) * -1);
+                }
+
+                /* Opened */
+                &.zuzi-vertical-navigation-opened {
+                    margin-left: 0;
+                }
+            }
+
+            /* Right positioned */
+            &.zuzi-vertical-navigation-position-right {
+
+                /* Side mode */
+                &.zuzi-vertical-navigation-mode-side {
+                    margin-right: calc(var(--zuzi-vertical-nav-dense-width) * -1);
+                }
+
+                /* Opened */
+                &.zuzi-vertical-navigation-opened {
+                    margin-right: 0;
+                }
+
+                /* Aside wrapper */
+                .zuzi-vertical-navigation-aside-wrapper {
+                    left: auto;
+                    right: var(--zuzi-vertical-nav-dense-width);
+                }
+
+                // &.zuzi-vertical-navigation-hover {
+
+                //     .zuzi-vertical-navigation-aside-wrapper {
+                //         left: auto;
+                //         right: var(--zuzi-vertical-nav-width);
+                //     }
+                // }
+            }
+        }
+
+        /* Wrapper */
+        .zuzi-vertical-navigation-wrapper {
+
+            /* Content */
+            .zuzi-vertical-navigation-content {
+
+                zuzi-vertical-navigation-aside-item,
+                zuzi-vertical-navigation-basic-item,
+                zuzi-vertical-navigation-collapsable-item,
+                zuzi-vertical-navigation-group-item {
+
+                    .zuzi-vertical-navigation-item-wrapper {
+
+                        .zuzi-vertical-navigation-item {
+                            width: calc(var(--zuzi-vertical-nav-dense-width) - 24px);
+                            min-width: calc(var(--zuzi-vertical-nav-dense-width) - 24px);
+                            max-width: calc(var(--zuzi-vertical-nav-dense-width) - 24px);
+                            margin: 0 auto;
+
+                            .zuzi-vertical-navigation-item-arrow,
+                            .zuzi-vertical-navigation-item-badge,
+                            .zuzi-vertical-navigation-item-title-wrapper {
+                                transition: opacity 400ms cubic-bezier(0.25, 0.8, 0.25, 1);
+                            }
+                        }
+                    }
+                }
+
+                zuzi-vertical-navigation-group-item {
+
+                    &:first-of-type {
+                        margin-top: 0;
+                    }
+                }
+            }
+        }
+
+        &:not(.zuzi-vertical-navigation-hover):not(.zuzi-vertical-navigation-mode-over) {
+
+            /* Wrapper */
+            .zuzi-vertical-navigation-wrapper {
+
+                /* Content */
+                .zuzi-vertical-navigation-content {
+
+                    .zuzi-vertical-navigation-item-wrapper {
+
+                        .zuzi-vertical-navigation-item {
+                            padding: 10px 16px;
+
+                            .zuzi-vertical-navigation-item-arrow,
+                            .zuzi-vertical-navigation-item-badge,
+                            .zuzi-vertical-navigation-item-title-wrapper {
+                                white-space: nowrap;
+                                opacity: 0;
+                            }
+                        }
+                    }
+
+                    zuzi-vertical-navigation-collapsable-item {
+
+                        .zuzi-vertical-navigation-item-children {
+                            display: none;
+                        }
+                    }
+
+                    zuzi-vertical-navigation-group-item {
+
+                        > .zuzi-vertical-navigation-item-wrapper {
+
+                            .zuzi-vertical-navigation-item {
+
+                                &:before {
+                                    content: '';
+                                    position: absolute;
+                                    top: 20px;
+                                    width: 23px;
+                                    border-top-width: 2px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        /* Aside wrapper */
+        .zuzi-vertical-navigation-aside-wrapper {
+            left: var(--zuzi-vertical-nav-dense-width);
+        }
+
+        /* Hover */
+        // &.zuzi-vertical-navigation-hover {
+
+        //     .zuzi-vertical-navigation-wrapper {
+        //         width: var(--zuzi-vertical-nav-width);
+
+        //         .zuzi-vertical-navigation-content {
+
+        //             .zuzi-vertical-navigation-item-wrapper {
+
+        //                 .zuzi-vertical-navigation-item {
+        //                     width: calc(var(--zuzi-vertical-nav-width) - 24px);
+        //                     min-width: calc(var(--zuzi-vertical-nav-width) - 24px);
+        //                     max-width: calc(var(--zuzi-vertical-nav-width) - 24px);
+
+        //                     .zuzi-vertical-navigation-item-arrow,
+        //                     .zuzi-vertical-navigation-item-badge,
+        //                     .zuzi-vertical-navigation-item-title-wrapper {
+        //                         white-space: nowrap;
+        //                         animation: removeWhiteSpaceNoWrap 1ms linear 350ms;
+        //                         animation-fill-mode: forwards;
+        //                     }
+        //                 }
+        //             }
+        //         }
+        //     }
+
+        //     .zuzi-vertical-navigation-aside-wrapper {
+        //         left: var(--zuzi-vertical-nav-width);
+        //     }
+        // }
+    }
+}
+
+@keyframes removeWhiteSpaceNoWrap {
+    0% {
+        white-space: nowrap
+    }
+    99% {
+        white-space: nowrap
+    }
+    100% {
+        white-space: normal;
+    }
+}

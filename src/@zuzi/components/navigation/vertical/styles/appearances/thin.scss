@@ -1,0 +1,99 @@
+/* Variables */
+:root {
+    --zuzi-vertical-navigation-thin-width: 80px;
+}
+
+zuzi-vertical-navigation {
+
+    /* Thin appearance overrides */
+    &.zuzi-vertical-navigation-appearance-thin {
+        width: var(--zuzi-vertical-navigation-thin-width);
+        min-width: var(--zuzi-vertical-navigation-thin-width);
+        max-width: var(--zuzi-vertical-navigation-thin-width);
+
+        /* Left positioned */
+        &.zuzi-vertical-navigation-position-left {
+
+            &.zuzi-vertical-navigation-mode-side {
+                margin-left: calc(var(--zuzi-vertical-navigation-thin-width) * -1);
+            }
+
+            &.zuzi-vertical-navigation-opened {
+                margin-left: 0;
+            }
+        }
+
+        /* Right positioned */
+        &.zuzi-vertical-navigation-position-right {
+
+            &.zuzi-vertical-navigation-mode-side {
+                margin-right: calc(var(--zuzi-vertical-navigation-thin-width) * -1);
+            }
+
+            &.zuzi-vertical-navigation-opened {
+                margin-right: 0;
+            }
+
+            .zuzi-vertical-navigation-aside-wrapper {
+                left: auto;
+                right: var(--zuzi-vertical-navigation-thin-width);
+            }
+        }
+
+        /* Wrapper */
+        .zuzi-vertical-navigation-wrapper {
+
+            /* Content */
+            .zuzi-vertical-navigation-content {
+
+                > zuzi-vertical-navigation-aside-item,
+                > zuzi-vertical-navigation-basic-item {
+                    flex-direction: column;
+                    justify-content: center;
+                    height: 64px;
+                    min-height: 64px;
+                    max-height: 64px;
+                    padding: 0 16px;
+
+                    .zuzi-vertical-navigation-item-wrapper {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+
+                        .zuzi-vertical-navigation-item {
+                            justify-content: center;
+                            padding: 12px;
+                            border-radius: 4px;
+
+                            .zuzi-vertical-navigation-item-icon {
+                                margin: 0;
+                            }
+
+                            .zuzi-vertical-navigation-item-arrow,
+                            .zuzi-vertical-navigation-item-badge-content,
+                            .zuzi-vertical-navigation-item-title-wrapper {
+                                display: none;
+                            }
+                        }
+                    }
+                }
+
+                > zuzi-vertical-navigation-collapsable-item {
+                    display: none
+                }
+
+                > zuzi-vertical-navigation-group-item {
+
+                    > .zuzi-vertical-navigation-item-wrapper {
+                        display: none
+                    }
+                }
+            }
+        }
+
+        /* Aside wrapper */
+        .zuzi-vertical-navigation-aside-wrapper {
+            left: var(--zuzi-vertical-navigation-thin-width);
+        }
+    }
+}

@@ -1,0 +1,1340 @@
+zuzi-alert {
+    display: block;
+
+    /* Common */
+    .zuzi-card-container {
+        position: relative;
+        display: flex;
+        padding: 16px;
+        font-size: 14px;
+        line-height: 1;
+
+        /* All icons */
+        .mat-icon {
+            color: currentColor !important;
+        }
+
+        /* Icon */
+        .zuzi-card-icon {
+            display: flex;
+            align-items: flex-start;
+
+            .zuzi-card-custom-icon,
+            .zuzi-card-default-icon {
+                display: none;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+
+                &:not(:empty) {
+                    display: flex;
+                    margin-right: 12px;
+                }
+            }
+
+            .zuzi-card-default-icon {
+
+                .mat-icon {
+                    @apply icon-size-5;
+                }
+            }
+
+            .zuzi-card-custom-icon {
+                display: none;
+
+                &:not(:empty) {
+                    display: flex;
+
+                    + .zuzi-card-default-icon {
+                        display: none;
+                    }
+                }
+            }
+        }
+
+        /* Content */
+        .zuzi-card-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            line-height: 1;
+
+            /* Title */
+            .zuzi-card-title {
+                display: none;
+                font-weight: 600;
+                line-height: 20px;
+
+                &:not(:empty) {
+                    display: block;
+
+                    /* Alert that comes after the title */
+                    + .zuzi-card-message {
+
+                        &:not(:empty) {
+                            margin-top: 4px;
+                        }
+                    }
+                }
+            }
+
+            /* Alert */
+            .zuzi-card-message {
+                display: none;
+                line-height: 20px;
+
+                &:not(:empty) {
+                    display: block;
+                }
+            }
+        }
+
+        /* Dismiss button */
+        .zuzi-card-dismiss-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 32px !important;
+            min-width: 32px !important;
+            height: 32px !important;
+            min-height: 32px !important;
+            line-height: 32px !important;
+
+            .mat-icon {
+                @apply icon-size-4;
+            }
+        }
+    }
+
+    /* Dismissible */
+    &.zuzi-card-dismissible {
+
+        .zuzi-card-container {
+
+            .zuzi-card-content {
+                margin-right: 32px;
+            }
+        }
+    }
+
+    &:not(.zuzi-card-dismissible) {
+
+        .zuzi-card-container {
+
+            .zuzi-card-dismiss-button {
+                display: none !important;
+            }
+        }
+    }
+
+    /* Border */
+    &.zuzi-card-appearance-border {
+
+        .zuzi-card-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 6px;
+            @apply shadow-md bg-card;
+
+            .zuzi-card-border {
+                position: absolute;
+                left: 0;
+                top: 0;
+                bottom: 0;
+                width: 4px;
+            }
+
+            .zuzi-card-message {
+                @apply text-gray-600;
+            }
+        }
+
+        /* Primary */
+        &.zuzi-card-type-primary {
+
+            .zuzi-card-container {
+
+                .zuzi-card-border {
+                    @apply bg-primary;
+                }
+
+                .zuzi-card-title,
+                .zuzi-card-icon {
+                    @apply text-primary;
+                }
+
+                .dark & {
+                    @apply bg-gray-700;
+
+                    .zuzi-card-border {
+                        @apply bg-primary-400;
+                    }
+
+                    .zuzi-card-title,
+                    .zuzi-card-icon {
+                        @apply text-primary-400;
+                    }
+
+                    .zuzi-card-message {
+                        @apply text-gray-300;
+                    }
+
+                    code {
+                        @apply bg-gray-400 text-gray-800;
+                    }
+                }
+            }
+        }
+
+        /* Accent */
+        &.zuzi-card-type-accent {
+
+            .zuzi-card-container {
+
+                .zuzi-card-border {
+                    @apply bg-accent;
+                }
+
+                .zuzi-card-title,
+                .zuzi-card-icon {
+                    @apply text-accent;
+                }
+
+                .dark & {
+                    @apply bg-gray-700;
+
+                    .zuzi-card-border {
+                        @apply bg-accent-400;
+                    }
+
+                    .zuzi-card-title,
+                    .zuzi-card-icon {
+                        @apply text-accent-400;
+                    }
+
+                    .zuzi-card-message {
+                        @apply text-gray-300;
+                    }
+
+                    code {
+                        @apply bg-gray-400 text-gray-800;
+                    }
+                }
+            }
+        }
+
+        /* Warn */
+        &.zuzi-card-type-warn {
+
+            .zuzi-card-container {
+
+                .zuzi-card-border {
+                    @apply bg-warn;
+                }
+
+                .zuzi-card-title,
+                .zuzi-card-icon {
+                    @apply text-warn;
+                }
+
+                .dark & {
+                    @apply bg-gray-700;
+
+                    .zuzi-card-border {
+                        @apply bg-warn-400;
+                    }
+
+                    .zuzi-card-title,
+                    .zuzi-card-icon {
+                        @apply text-warn-400;
+                    }
+
+                    .zuzi-card-message {
+                        @apply text-gray-300;
+                    }
+
+                    code {
+                        @apply bg-gray-400 text-gray-800;
+                    }
+                }
+            }
+        }
+
+        /* Basic */
+        &.zuzi-card-type-basic {
+
+            .zuzi-card-container {
+
+                .zuzi-card-border {
+                    @apply bg-gray-600;
+                }
+
+                .zuzi-card-title,
+                .zuzi-card-icon {
+                    @apply text-gray-600;
+                }
+
+                .dark & {
+                    @apply bg-gray-700;
+
+                    .zuzi-card-border {
+                        @apply bg-gray-400;
+                    }
+
+                    .zuzi-card-title,
+                    .zuzi-card-icon {
+                        @apply text-gray-400;
+                    }
+
+                    .zuzi-card-message {
+                        @apply text-gray-300;
+                    }
+
+                    code {
+                        @apply bg-gray-400 text-gray-800;
+                    }
+                }
+            }
+        }
+
+        /* Info */
+        &.zuzi-card-type-info {
+
+            .zuzi-card-container {
+
+                .zuzi-card-border {
+                    @apply bg-blue-600;
+                }
+
+                .zuzi-card-title,
+                .zuzi-card-icon {
+                    @apply text-blue-700;
+                }
+
+                .dark & {
+                    @apply bg-gray-700;
+
+                    .zuzi-card-border {
+                        @apply bg-blue-400;
+                    }
+
+                    .zuzi-card-title,
+                    .zuzi-card-icon {
+                        @apply text-blue-400;
+                    }
+
+                    .zuzi-card-message {
+                        @apply text-gray-300;
+                    }
+
+                    code {
+                        @apply bg-gray-400 text-gray-800;
+                    }
+                }
+            }
+        }
+
+        /* Success */
+        &.zuzi-card-type-success {
+
+            .zuzi-card-container {
+
+                .zuzi-card-border {
+                    @apply bg-green-500;
+                }
+
+                .zuzi-card-title,
+                .zuzi-card-icon {
+                    @apply text-green-500;
+                }
+
+                .dark & {
+                    @apply bg-gray-700;
+
+                    .zuzi-card-border {
+                        @apply bg-green-400;
+                    }
+
+                    .zuzi-card-title,
+                    .zuzi-card-icon {
+                        @apply text-green-400;
+                    }
+
+                    .zuzi-card-message {
+                        @apply text-gray-300;
+                    }
+
+                    code {
+                        @apply bg-gray-400 text-gray-800;
+                    }
+                }
+            }
+        }
+
+        /* Warning */
+        &.zuzi-card-type-warning {
+
+            .zuzi-card-container {
+
+                .zuzi-card-border {
+                    @apply bg-amber-500;
+                }
+
+                .zuzi-card-title,
+                .zuzi-card-icon {
+                    @apply text-amber-500;
+                }
+
+                .dark & {
+                    @apply bg-gray-700;
+
+                    .zuzi-card-border {
+                        @apply bg-amber-400;
+                    }
+
+                    .zuzi-card-title,
+                    .zuzi-card-icon {
+                        @apply text-amber-400;
+                    }
+
+                    .zuzi-card-message {
+                        @apply text-gray-300;
+                    }
+
+                    code {
+                        @apply bg-gray-400 text-gray-800;
+                    }
+                }
+            }
+        }
+
+        /* Error */
+        &.zuzi-card-type-error {
+
+            .zuzi-card-container {
+
+                .zuzi-card-border {
+                    @apply bg-red-600;
+                }
+
+                .zuzi-card-title,
+                .zuzi-card-icon {
+                    @apply text-red-700;
+                }
+
+                .dark & {
+                    @apply bg-gray-700;
+
+                    .zuzi-card-border {
+                        @apply bg-red-400;
+                    }
+
+                    .zuzi-card-title,
+                    .zuzi-card-icon {
+                        @apply text-red-400;
+                    }
+
+                    .zuzi-card-message {
+                        @apply text-gray-300;
+                    }
+
+                    code {
+                        @apply bg-gray-400 text-gray-800;
+                    }
+                }
+            }
+        }
+    }
+
+    /* Fill */
+    &.zuzi-card-appearance-fill {
+
+        .zuzi-card-container {
+            border-radius: 6px;
+
+            .zuzi-card-dismiss-button {
+                @apply text-white;
+            }
+        }
+
+        /* Primary */
+        &.zuzi-card-type-primary {
+
+            .zuzi-card-container {
+                @apply bg-primary-600;
+
+                .zuzi-card-icon {
+                    @apply text-white;
+                }
+
+                .zuzi-card-title {
+                    @apply text-white;
+                }
+
+                .zuzi-card-message {
+                    @apply text-primary-100;
+                }
+
+                code {
+                    @apply text-primary-800 bg-primary-200;
+                }
+            }
+        }
+
+        /* Accent */
+        &.zuzi-card-type-accent {
+
+            .zuzi-card-container {
+                @apply bg-accent-600;
+
+                .zuzi-card-icon {
+                    @apply text-white;
+                }
+
+                .zuzi-card-title {
+                    @apply text-white;
+                }
+
+                .zuzi-card-message {
+                    @apply text-accent-100;
+                }
+
+                code {
+                    @apply text-accent-800 bg-accent-200;
+                }
+            }
+        }
+
+        /* Warn */
+        &.zuzi-card-type-warn {
+
+            .zuzi-card-container {
+                @apply bg-warn-600;
+
+                .zuzi-card-icon {
+                    @apply text-white;
+                }
+
+                .zuzi-card-title {
+                    @apply text-white;
+                }
+
+                .zuzi-card-message {
+                    @apply text-warn-100;
+                }
+
+                code {
+                    @apply text-warn-800 bg-warn-200;
+                }
+            }
+        }
+
+        /* Basic */
+        &.zuzi-card-type-basic {
+
+            .zuzi-card-container {
+                @apply bg-gray-600;
+
+                .zuzi-card-icon {
+                    @apply text-white;
+                }
+
+                .zuzi-card-title {
+                    @apply text-white;
+                }
+
+                .zuzi-card-message {
+                    @apply text-gray-100;
+                }
+
+                code {
+                    @apply bg-gray-200 text-gray-800;
+                }
+            }
+        }
+
+        /* Info */
+        &.zuzi-card-type-info {
+
+            .zuzi-card-container {
+                @apply bg-blue-600;
+
+                .zuzi-card-icon {
+                    @apply text-white;
+                }
+
+                .zuzi-card-title {
+                    @apply text-white;
+                }
+
+                .zuzi-card-message {
+                    @apply text-blue-100;
+                }
+
+                code {
+                    @apply bg-blue-200 text-blue-800;
+                }
+            }
+        }
+
+        /* Success */
+        &.zuzi-card-type-success {
+
+            .zuzi-card-container {
+                @apply bg-green-600;
+
+                .zuzi-card-icon {
+                    @apply text-white;
+                }
+
+                .zuzi-card-title {
+                    @apply text-white;
+                }
+
+                .zuzi-card-message {
+                    @apply text-green-100;
+                }
+
+                code {
+                    @apply bg-green-200 text-gray-800;
+                }
+            }
+        }
+
+        /* Warning */
+        &.zuzi-card-type-warning {
+
+            .zuzi-card-container {
+                @apply bg-amber-500;
+
+                .zuzi-card-icon {
+                    @apply text-white;
+                }
+
+                .zuzi-card-title {
+                    @apply text-white;
+                }
+
+                .zuzi-card-message {
+                    @apply text-amber-100;
+                }
+
+                code {
+                    @apply bg-amber-200 text-amber-800;
+                }
+            }
+        }
+
+        /* Error */
+        &.zuzi-card-type-error {
+
+            .zuzi-card-container {
+                @apply bg-red-600;
+
+                .zuzi-card-icon {
+                    @apply text-white;
+                }
+
+                .zuzi-card-title {
+                    @apply text-white;
+                }
+
+                .zuzi-card-message {
+                    @apply text-red-100;
+                }
+
+                code {
+                    @apply bg-red-200 text-red-800;
+                }
+            }
+        }
+    }
+
+    /* Outline */
+    &.zuzi-card-appearance-outline {
+
+        .zuzi-card-container {
+            border-radius: 6px;
+        }
+
+        /* Primary */
+        &.zuzi-card-type-primary {
+
+            .zuzi-card-container {
+                @apply bg-primary-50 ring-1 ring-primary-400 ring-inset;
+
+                .zuzi-card-icon {
+                    @apply text-primary-600;
+                }
+
+                .zuzi-card-title,
+                .zuzi-card-dismiss-button {
+                    @apply text-primary-900;
+                }
+
+                .zuzi-card-message {
+                    @apply text-primary-700;
+                }
+
+                code {
+                    @apply text-primary-800 bg-primary-200;
+                }
+
+                .dark & {
+                    @apply bg-primary-600;
+
+                    .zuzi-card-icon {
+                        @apply text-white;
+                    }
+
+                    .zuzi-card-title,
+                    .zuzi-card-dismiss-button {
+                        @apply text-white;
+                    }
+
+                    .zuzi-card-message {
+                        @apply text-primary-200;
+                    }
+                }
+            }
+        }
+
+        /* Accent */
+        &.zuzi-card-type-accent {
+
+            .zuzi-card-container {
+                @apply bg-accent-100 ring-1 ring-accent-400 ring-inset;
+
+                .zuzi-card-icon {
+                    @apply text-accent-600;
+                }
+
+                .zuzi-card-title,
+                .zuzi-card-dismiss-button {
+                    @apply text-accent-900;
+                }
+
+                .zuzi-card-message {
+                    @apply text-accent-700;
+                }
+
+                code {
+                    @apply text-accent-800 bg-accent-200;
+                }
+
+                .dark & {
+                    @apply bg-accent-600;
+
+                    .zuzi-card-icon {
+                        @apply text-white;
+                    }
+
+                    .zuzi-card-title,
+                    .zuzi-card-dismiss-button {
+                        @apply text-white;
+                    }
+
+                    .zuzi-card-message {
+                        @apply text-accent-200;
+                    }
+                }
+            }
+        }
+
+        /* Warn */
+        &.zuzi-card-type-warn {
+
+            .zuzi-card-container {
+                @apply bg-warn-50 ring-1 ring-warn-400 ring-inset;
+
+                .zuzi-card-icon {
+                    @apply text-warn-600;
+                }
+
+                .zuzi-card-title,
+                .zuzi-card-dismiss-button {
+                    @apply text-warn-900;
+                }
+
+                .zuzi-card-message {
+                    @apply text-warn-700;
+                }
+
+                code {
+                    @apply text-warn-800 bg-warn-200;
+                }
+
+                .dark & {
+                    @apply bg-warn-600;
+
+                    .zuzi-card-icon {
+                        @apply text-white;
+                    }
+
+                    .zuzi-card-title,
+                    .zuzi-card-dismiss-button {
+                        @apply text-white;
+                    }
+
+                    .zuzi-card-message {
+                        @apply text-warn-200;
+                    }
+                }
+            }
+        }
+
+        /* Basic */
+        &.zuzi-card-type-basic {
+
+            .zuzi-card-container {
+                @apply bg-gray-100 ring-1 ring-gray-400 ring-inset;
+
+                .zuzi-card-icon {
+                    @apply text-gray-600;
+                }
+
+                .zuzi-card-title,
+                .zuzi-card-dismiss-button {
+                    @apply text-gray-900;
+                }
+
+                .zuzi-card-message {
+                    @apply text-gray-700;
+                }
+
+                code {
+                    @apply bg-gray-200 text-gray-800;
+                }
+
+                .dark & {
+                    @apply bg-gray-600;
+
+                    .zuzi-card-icon {
+                        @apply text-white;
+                    }
+
+                    .zuzi-card-title,
+                    .zuzi-card-dismiss-button {
+                        @apply text-white;
+                    }
+
+                    .zuzi-card-message {
+                        @apply text-gray-200;
+                    }
+                }
+            }
+        }
+
+        /* Info */
+        &.zuzi-card-type-info {
+
+            .zuzi-card-container {
+                @apply bg-blue-50 ring-1 ring-blue-400 ring-inset;
+
+                .zuzi-card-icon {
+                    @apply text-blue-600;
+                }
+
+                .zuzi-card-title,
+                .zuzi-card-dismiss-button {
+                    @apply text-blue-900;
+                }
+
+                .zuzi-card-message {
+                    @apply text-blue-700;
+                }
+
+                code {
+                    @apply bg-blue-200 text-blue-800;
+                }
+
+                .dark & {
+                    @apply bg-blue-600;
+
+                    .zuzi-card-icon {
+                        @apply text-white;
+                    }
+
+                    .zuzi-card-title,
+                    .zuzi-card-dismiss-button {
+                        @apply text-white;
+                    }
+
+                    .zuzi-card-message {
+                        @apply text-blue-200;
+                    }
+                }
+            }
+        }
+
+        /* Success */
+        &.zuzi-card-type-success {
+
+            .zuzi-card-container {
+                @apply bg-green-50 ring-1 ring-green-400 ring-inset;
+
+                .zuzi-card-icon {
+                    @apply text-green-600;
+                }
+
+                .zuzi-card-title,
+                .zuzi-card-dismiss-button {
+                    @apply text-green-900;
+                }
+
+                .zuzi-card-message {
+                    @apply text-green-700;
+                }
+
+                code {
+                    @apply bg-green-200 text-green-800;
+                }
+
+                .dark & {
+                    @apply bg-green-600;
+
+                    .zuzi-card-icon {
+                        @apply text-white;
+                    }
+
+                    .zuzi-card-title,
+                    .zuzi-card-dismiss-button {
+                        @apply text-white;
+                    }
+
+                    .zuzi-card-message {
+                        @apply text-green-200;
+                    }
+                }
+            }
+        }
+
+        /* Warning */
+        &.zuzi-card-type-warning {
+
+            .zuzi-card-container {
+                @apply bg-amber-50 ring-1 ring-amber-400 ring-inset;
+
+                .zuzi-card-icon {
+                    @apply text-amber-600;
+                }
+
+                .zuzi-card-title,
+                .zuzi-card-dismiss-button {
+                    @apply text-amber-900;
+                }
+
+                .zuzi-card-message {
+                    @apply text-amber-700;
+                }
+
+                code {
+                    @apply bg-amber-200 text-amber-800;
+                }
+
+                .dark & {
+                    @apply bg-amber-600;
+
+                    .zuzi-card-icon {
+                        @apply text-white;
+                    }
+
+                    .zuzi-card-title,
+                    .zuzi-card-dismiss-button {
+                        @apply text-white;
+                    }
+
+                    .zuzi-card-message {
+                        @apply text-amber-200;
+                    }
+                }
+            }
+        }
+
+        /* Error */
+        &.zuzi-card-type-error {
+
+            .zuzi-card-container {
+                @apply bg-red-50 ring-1 ring-red-400 ring-inset;
+
+                .zuzi-card-icon {
+                    @apply text-red-600;
+                }
+
+                .zuzi-card-title,
+                .zuzi-card-dismiss-button {
+                    @apply text-red-900;
+                }
+
+                .zuzi-card-message {
+                    @apply text-red-700;
+                }
+
+                code {
+                    @apply bg-red-200 text-red-800;
+                }
+
+                .dark & {
+                    @apply bg-red-600;
+
+                    .zuzi-card-icon {
+                        @apply text-white;
+                    }
+
+                    .zuzi-card-title,
+                    .zuzi-card-dismiss-button {
+                        @apply text-white;
+                    }
+
+                    .zuzi-card-message {
+                        @apply text-red-200;
+                    }
+                }
+            }
+        }
+    }
+
+    /* Soft */
+    &.zuzi-card-appearance-soft {
+
+        .zuzi-card-container {
+            border-radius: 6px;
+        }
+
+        /* Primary */
+        &.zuzi-card-type-primary {
+
+            .zuzi-card-container {
+                @apply bg-primary-50;
+
+                .zuzi-card-icon {
+                    @apply text-primary-600;
+                }
+
+                .zuzi-card-title,
+                .zuzi-card-dismiss-button {
+                    @apply text-primary-900;
+                }
+
+                .zuzi-card-message {
+                    @apply text-primary-700;
+                }
+
+                code {
+                    @apply text-primary-800 bg-primary-200;
+                }
+
+                .dark & {
+                    @apply bg-primary-600;
+
+                    .zuzi-card-icon {
+                        @apply text-white;
+                    }
+
+                    .zuzi-card-title,
+                    .zuzi-card-dismiss-button {
+                        @apply text-white;
+                    }
+
+                    .zuzi-card-message {
+                        @apply text-primary-200;
+                    }
+                }
+            }
+        }
+
+        /* Accent */
+        &.zuzi-card-type-accent {
+
+            .zuzi-card-container {
+                @apply bg-accent-100;
+
+                .zuzi-card-icon {
+                    @apply text-accent-600;
+                }
+
+                .zuzi-card-title,
+                .zuzi-card-dismiss-button {
+                    @apply text-accent-900;
+                }
+
+                .zuzi-card-message {
+                    @apply text-accent-700;
+                }
+
+                code {
+                    @apply text-accent-800 bg-accent-200;
+                }
+
+                .dark & {
+                    @apply bg-accent-600;
+
+                    .zuzi-card-icon {
+                        @apply text-white;
+                    }
+
+                    .zuzi-card-title,
+                    .zuzi-card-dismiss-button {
+                        @apply text-white;
+                    }
+
+                    .zuzi-card-message {
+                        @apply text-accent-200;
+                    }
+                }
+            }
+        }
+
+        /* Warn */
+        &.zuzi-card-type-warn {
+
+            .zuzi-card-container {
+                @apply bg-warn-50;
+
+                .zuzi-card-icon {
+                    @apply text-warn-600;
+                }
+
+                .zuzi-card-title,
+                .zuzi-card-dismiss-button {
+                    @apply text-warn-900;
+                }
+
+                .zuzi-card-message {
+                    @apply text-warn-700;
+                }
+
+                code {
+                    @apply text-warn-800 bg-warn-200;
+                }
+
+                .dark & {
+                    @apply bg-warn-600;
+
+                    .zuzi-card-icon {
+                        @apply text-white;
+                    }
+
+                    .zuzi-card-title,
+                    .zuzi-card-dismiss-button {
+                        @apply text-white;
+                    }
+
+                    .zuzi-card-message {
+                        @apply text-warn-200;
+                    }
+                }
+            }
+        }
+
+        /* Basic */
+        &.zuzi-card-type-basic {
+
+            .zuzi-card-container {
+                @apply bg-gray-100;
+
+                .zuzi-card-icon {
+                    @apply text-gray-600;
+                }
+
+                .zuzi-card-title,
+                .zuzi-card-dismiss-button {
+                    @apply text-gray-900;
+                }
+
+                .zuzi-card-message {
+                    @apply text-gray-700;
+                }
+
+                code {
+                    @apply bg-gray-200 text-gray-800;
+                }
+
+                .dark & {
+                    @apply bg-gray-600;
+
+                    .zuzi-card-icon {
+                        @apply text-white;
+                    }
+
+                    .zuzi-card-title,
+                    .zuzi-card-dismiss-button {
+                        @apply text-white;
+                    }
+
+                    .zuzi-card-message {
+                        @apply text-gray-200;
+                    }
+                }
+            }
+        }
+
+        /* Info */
+        &.zuzi-card-type-info {
+
+            .zuzi-card-container {
+                @apply bg-blue-50;
+
+                .zuzi-card-icon {
+                    @apply text-blue-600;
+                }
+
+                .zuzi-card-title,
+                .zuzi-card-dismiss-button {
+                    @apply text-blue-900;
+                }
+
+                .zuzi-card-message {
+                    @apply text-blue-700;
+                }
+
+                code {
+                    @apply bg-blue-200 text-blue-800;
+                }
+
+                .dark & {
+                    @apply bg-blue-600;
+
+                    .zuzi-card-icon {
+                        @apply text-white;
+                    }
+
+                    .zuzi-card-title,
+                    .zuzi-card-dismiss-button {
+                        @apply text-white;
+                    }
+
+                    .zuzi-card-message {
+                        @apply text-blue-200;
+                    }
+                }
+            }
+        }
+
+        /* Success */
+        &.zuzi-card-type-success {
+
+            .zuzi-card-container {
+                @apply bg-green-50;
+
+                .zuzi-card-icon {
+                    @apply text-green-600;
+                }
+
+                .zuzi-card-title,
+                .zuzi-card-dismiss-button {
+                    @apply text-green-900;
+                }
+
+                .zuzi-card-message {
+                    @apply text-green-700;
+                }
+
+                code {
+                    @apply bg-green-200 text-green-800;
+                }
+
+                .dark & {
+                    @apply bg-green-600;
+
+                    .zuzi-card-icon {
+                        @apply text-white;
+                    }
+
+                    .zuzi-card-title,
+                    .zuzi-card-dismiss-button {
+                        @apply text-white;
+                    }
+
+                    .zuzi-card-message {
+                        @apply text-green-200;
+                    }
+                }
+            }
+        }
+
+        /* Warning */
+        &.zuzi-card-type-warning {
+
+            .zuzi-card-container {
+                @apply bg-amber-50;
+
+                .zuzi-card-icon {
+                    @apply text-amber-600;
+                }
+
+                .zuzi-card-title,
+                .zuzi-card-dismiss-button {
+                    @apply text-amber-900;
+                }
+
+                .zuzi-card-message {
+                    @apply text-amber-700;
+                }
+
+                code {
+                    @apply bg-amber-200 text-amber-800;
+                }
+
+                .dark & {
+                    @apply bg-amber-600;
+
+                    .zuzi-card-icon {
+                        @apply text-white;
+                    }
+
+                    .zuzi-card-title,
+                    .zuzi-card-dismiss-button {
+                        @apply text-white;
+                    }
+
+                    .zuzi-card-message {
+                        @apply text-amber-200;
+                    }
+                }
+            }
+        }
+
+        /* Error */
+        &.zuzi-card-type-error {
+
+            .zuzi-card-container {
+                @apply bg-red-50;
+
+                .zuzi-card-icon {
+                    @apply text-red-600;
+                }
+
+                .zuzi-card-title,
+                .zuzi-card-dismiss-button {
+                    @apply text-red-900;
+                }
+
+                .zuzi-card-message {
+                    @apply text-red-700;
+                }
+
+                code {
+                    @apply bg-red-200 text-red-800;
+                }
+
+                .dark & {
+                    @apply bg-red-600;
+
+                    .zuzi-card-icon {
+                        @apply text-white;
+                    }
+
+                    .zuzi-card-title,
+                    .zuzi-card-dismiss-button {
+                        @apply text-white;
+                    }
+
+                    .zuzi-card-message {
+                        @apply text-red-200;
+                    }
+                }
+            }
+        }
+    }
+}

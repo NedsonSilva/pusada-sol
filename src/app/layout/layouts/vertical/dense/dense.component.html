@@ -1,0 +1,86 @@
+<zuzi-loading-bar></zuzi-loading-bar>
+<alert-bar #alertBar></alert-bar>
+<!-- Navigation -->
+<!-- [mode]="isScreenSmall ? 'over' : 'side'" -->
+<zuzi-vertical-nav
+    class="bg-white dark:bg-card print:hidden shadow"
+    [appearance]="navigationAppearance"
+    [name]="'mainNavigation'"
+    [navigation]="navigation.default"
+    [opened]="true">
+
+    <ng-container zuziVerticalNavigationContentHeader>
+        <div class="mb-2" [class.mt-10]="alertBar.notifications?.length">
+            @if (navigationAppearance === 'dense') {
+                <div class="flex items-center justify-center h-16">
+                    <img
+                        class="w-[80%] object-contain"
+                        src="assets/images/logo/logo.png"
+                        alt="Logo image">
+                </div>
+            } @else {
+                <div class="flex items-center justify-center h-22 py-2">
+                    <img
+                        class="w-[90%] object-contain"
+                        src="assets/images/logo/Logo-icon-text.png"
+                        alt="Logo image">
+                </div>
+            }
+        </div>
+
+    </ng-container>
+</zuzi-vertical-nav>
+
+
+
+<!-- Wrapper -->
+<div class="relative flex flex-col flex-auto w-full min-w-0" [class.pt-10]="alertBar.notifications?.length">
+    <!-- Header -->
+    <div class="flex flex-0 items-center w-full h-12 px-4 md:px-5 z-49 shadow dark:shadow-none dark:border-b bg-primary dark:bg-card text-white print:hidden">
+        <div class="flex items-center pr-2 space-x-1 -ml-3">
+            <!-- Navigation appearance toggle button -->
+            <button
+                class="hidden sm:inline-flex"
+                mat-icon-button
+                (click)="toggleNavigationAppearance()">
+                <mat-icon
+                    class="text-current"
+                    [svgIcon]="navigationAppearance === 'default' ? 'mat_outline:arrow_back_ios': 'mat_outline:arrow_forward_ios'"
+                ></mat-icon>
+            </button>
+            <button
+                class="inline-flex sm:hidden"
+                mat-icon-button
+                (click)="toggleNavigation('mainNavigation')">
+                <mat-icon
+                    class="text-current"
+                    [svgIcon]="'mat_outline:menu'"
+                ></mat-icon>
+            </button>
+
+        </div>
+        <!-- Components -->
+        <div class="flex items-center pl-2 ml-auto space-x-0.5 sm:space-x-2">
+            <!-- <shortcuts></shortcuts> -->
+            <messages></messages>
+            <!-- <notifications></notifications> -->
+            <!-- <button
+                class="lg:hidden"
+                mat-icon-button
+                (click)="quickChat.toggle()">
+                <mat-icon [svgIcon]="'heroicons_outline:chat-alt-2'"></mat-icon>
+            </button> -->
+            <user></user>
+        </div>
+    </div>
+
+    <!-- Content -->
+    <div class="absolute inset-0 mt-12 flex flex-col flex-auto overflow-y-auto" cdkScrollable>
+        <!-- *ngIf="true" hack is required here for router-outlet to work correctly.
+             Otherwise, layout changes won't be registered and the view won't be updated! -->
+        <router-outlet *ngIf="true"></router-outlet>
+    </div>
+</div>
+
+<!-- Quick chat -->
+<!-- <quick-chat #quickChat="quickChat"></quick-chat> -->

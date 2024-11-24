@@ -1,0 +1,59 @@
+<button
+    class="flex items-stretch bg-primary text-white rounded-full cursor-pointer h-[40px] w-full overflow-hidden"
+    #btnTriggerMenu
+    [ngClass]="styleClass"
+    [disabled]="disabled"
+    type="button"
+>
+    <div class="w-full flex items-stretch text-lg font-medium grow">
+        <button
+            type="button"
+            (click)="onClick.emit(selected)"
+            matRipple
+            [disabled]="disabled"
+            class="flex items-center justify-center min-w-15 pl-5 pr-2 hover:bg-gray-900 hover:bg-opacity-10 transition grow"
+            [class.pr-5]="!showIconMenu"
+        >
+            <div class="text-center grow leading-4">
+                <span class="text-base block">
+                    @if (label) {
+                        {{ label }}
+                    }
+                    <ng-content select="[splitButtonLabel]"></ng-content>
+                </span>
+            </div>
+        </button>
+
+        @if (showIconMenu) {
+            <button
+                type="button"
+                class="w-[40px] grid place-items-center hover:bg-gray-900 hover:bg-opacity-10"
+                (menuOpened)="toggleMenu(true)"
+                (menuClosed)="toggleMenu(false)"
+                [matMenuTriggerFor]="menuSplitButton"
+                [disabled]="loading || disabled"
+                matRipple
+            >
+                @if (!loading) {
+                    <mat-icon
+                        svgIcon="mat_solid:arrow_drop_down"
+                        class="text-current icon-size-6 transition"
+                        [ngClass]="{'rotate-180': menuOpened }"
+                    ></mat-icon>
+                }
+                @else {
+                    <mat-progress-spinner diameter="24" color="primary" mode="indeterminate"></mat-progress-spinner>
+                }
+            </button>
+        }
+    </div>
+</button>
+<mat-menu #menuSplitButton [style.width]="btnTriggerMenu.offsetWidth + 'px'" class="shadow-md">
+    <div class="flex flex-col gap-5"
+        [style.minWidth]="btnTriggerMenu.offsetWidth + 'px'"
+    >
+        <ul class="font-semibold text-[.9rem] select-none w-full">
+            <ng-content></ng-content>
+        </ul>
+    </div>
+</mat-menu>

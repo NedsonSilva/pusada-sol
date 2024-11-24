@@ -1,0 +1,15 @@
+zuzi-alert .zuzi-alert-container {
+    border-radius: 0% !important;
+    padding: 0 10px !important;
+    display: block;
+
+    .zuzi-alert-dismiss-button {
+        top: 4px;
+    }
+    font-weight: 500 !important;
+}
+
+
+:host::ng-deep zuzi-alert.zuzi-alert-appearance-soft.zuzi-alert-type-error .zuzi-alert-container {
+    background-color: var(--zuzi-primary) !important;
+}

@@ -1,0 +1,266 @@
+<div class="flex overflow-hidden bg-card w-full">
+    <div
+        class="relative hidden h-full flex-auto items-center justify-center overflow-hidden bg-primary p-16 dark:border-r md:flex lg:px-28">
+
+        <div class="relative z-10 w-full max-w-xl">
+            <div class="text-7xl font-bold leading-none text-gray-100">
+
+                <img src="assets/images/logo/slogan-dark.png">
+            </div>
+        </div>
+    </div>
+
+    <div class="flex items-center py-8 px-4 sm:p-10 md:p-20 bg-card border">
+        <div class="w-full max-w-100 mx-auto sm:mx-0">
+            <!-- Logo -->
+            <div class="w-full">
+                <img src="assets/images/logo/Logo-icon-text.png">
+            </div>
+
+            <!-- Title -->
+            <div class="mt-10 text-4xl font-extrabold tracking-tight leading-tight">Fazer login</div>
+
+            <!-- Alert -->
+            <zuzi-alert
+                class="mt-8 -mb-4"
+                *ngIf="showAlert"
+                [appearance]="'outline'"
+                [showIcon]="false"
+                [type]="alert.type"
+                [@shake]="alert.type === 'error'"
+            >
+                {{alert.message}}
+            </zuzi-alert>
+
+            <!-- Sign in form -->
+            <form
+                class="mt-8"
+                [formGroup]="form"
+            >
+
+                <!-- Email field -->
+                <mat-form-field
+                    class="w-full"
+                    floatLabel="always"
+                >
+                    <mat-label>E-mail</mat-label>
+                    <input
+                        id="email"
+                        matInput
+                        [formControlName]="'email'"
+                    >
+                    <mat-error *ngIf="form.get('email').hasError('required')">
+                        E-emal é obrigatório
+                    </mat-error>
+                    <mat-error *ngIf="form.get('email').hasError('email')">
+                        E-email inválido
+                    </mat-error>
+                </mat-form-field>
+
+                <!-- Password field -->
+                <mat-form-field class="w-full">
+                    <mat-label>Senha</mat-label>
+                    <input
+                        id="password"
+                        matInput
+                        type="password"
+                        [formControlName]="'password'"
+                        #passwordField
+                    >
+                    <button
+                        mat-icon-button
+                        type="button"
+                        (click)="passwordField.type === 'password' ? passwordField.type = 'text' : passwordField.type = 'password'"
+                        matSuffix
+                    >
+                        <mat-icon
+                            class="icon-size-5"
+                            *ngIf="passwordField.type === 'password'"
+                            [svgIcon]="'heroicons_solid:eye'"
+                        ></mat-icon>
+                        <mat-icon
+                            class="icon-size-5"
+                            *ngIf="passwordField.type === 'text'"
+                            [svgIcon]="'heroicons_solid:eye-off'"
+                        ></mat-icon>
+                    </button>
+                    <mat-error>
+                        Senha é obrigatório
+                    </mat-error>
+                </mat-form-field>
+
+                <!-- <div class="inline-flex items-end justify-end w-full">
+                    <a
+                        class="text-md font-medium text-primary-500 hover:underline"
+                        [routerLink]="['/forgot-password']">Esqueci minha senha
+                    </a>
+                </div> -->
+
+                <button
+                    class="zuzi-mat-button-large w-full mt-6 font-medium"
+                    mat-flat-button
+                    [color]="'primary'"
+                    [disabled]="form.disabled"
+                    (click)="signIn()"
+                >
+                    <span *ngIf="!form.disabled">
+                        Entrar
+                    </span>
+                    <mat-progress-spinner
+                        *ngIf="form.disabled"
+                        [diameter]="24"
+                        [mode]="'indeterminate'"
+                    ></mat-progress-spinner>
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+<div
+    *ngIf="false"
+    class="flex flex-col items-center justify-center flex-auto min-w-0 relative"
+>
+    <!-- <div class="block dark:hidden absolute inset-0 bg-[url('assets/images/login_background.png')] bg-">
+    </div>
+    <div class="hidden dark:block absolute inset-0 bg-[url('assets/images/login_background_dark.png')] bg-">
+    </div> -->
+
+    <div class="flex items-center py-8 px-4 sm:p-10 md:p-16 rounded-lg sm:shadow-lg bg-card z-10">
+        <div class="w-full max-w-80 sm:w-80 mx-auto sm:mx-0">
+            <!-- Logo -->
+            <div class="w-full">
+                <img src="assets/images/logo/Logo-icon-text.png">
+            </div>
+
+            <!-- Title -->
+            <div class="mt-10 text-4xl font-extrabold tracking-tight leading-tight">Fazer login</div>
+
+            <!-- Alert -->
+            <zuzi-alert
+                class="mt-8 -mb-4"
+                *ngIf="showAlert"
+                [appearance]="'outline'"
+                [showIcon]="false"
+                [type]="alert.type"
+                [@shake]="alert.type === 'error'"
+            >
+                {{alert.message}}
+            </zuzi-alert>
+
+            <!-- Sign in form -->
+            <form
+                class="mt-8"
+                [formGroup]="form"
+            >
+
+                <!-- Email field -->
+                <mat-form-field
+                    class="w-full"
+                    floatLabel="always"
+                >
+                    <mat-label>E-mail</mat-label>
+                    <input
+                        id="email"
+                        matInput
+                        [formControlName]="'email'"
+                    >
+                    <mat-error *ngIf="form.get('email').hasError('required')">
+                        E-emal é obrigatório
+                    </mat-error>
+                    <mat-error *ngIf="form.get('email').hasError('email')">
+                        E-email inválido
+                    </mat-error>
+                </mat-form-field>
+
+                <!-- Password field -->
+                <mat-form-field class="w-full">
+                    <mat-label>Senha</mat-label>
+                    <input
+                        id="password"
+                        matInput
+                        type="password"
+                        [formControlName]="'password'"
+                        #passwordField
+                    >
+                    <button
+                        mat-icon-button
+                        type="button"
+                        (click)="passwordField.type === 'password' ? passwordField.type = 'text' : passwordField.type = 'password'"
+                        matSuffix
+                    >
+                        <mat-icon
+                            class="icon-size-5"
+                            *ngIf="passwordField.type === 'password'"
+                            [svgIcon]="'heroicons_solid:eye'"
+                        ></mat-icon>
+                        <mat-icon
+                            class="icon-size-5"
+                            *ngIf="passwordField.type === 'text'"
+                            [svgIcon]="'heroicons_solid:eye-off'"
+                        ></mat-icon>
+                    </button>
+                    <mat-error>
+                        Senha é obrigatório
+                    </mat-error>
+                </mat-form-field>
+
+                <!-- <div class="inline-flex items-end justify-end w-full">
+                    <a
+                        class="text-md font-medium text-primary-500 hover:underline"
+                        [routerLink]="['/forgot-password']">Esqueci minha senha
+                    </a>
+                </div> -->
+
+                <button
+                    class="zuzi-mat-button-large w-full mt-6 font-medium"
+                    mat-flat-button
+                    [color]="'primary'"
+                    [disabled]="form.disabled"
+                    (click)="signIn()"
+                >
+                    <span *ngIf="!form.disabled">
+                        Entrar
+                    </span>
+                    <mat-progress-spinner
+                        *ngIf="form.disabled"
+                        [diameter]="24"
+                        [mode]="'indeterminate'"
+                    ></mat-progress-spinner>
+                </button>
+
+                <!-- <div class="flex items-center mt-8">
+                    <div class="flex-auto mt-px border-t"></div>
+                    <div class="mx-2 text-secondary">Ou continue com</div>
+                    <div class="flex-auto mt-px border-t"></div>
+                </div>
+
+                <div class="flex items-center mt-8 space-x-4">
+                    <button
+                        class="flex-auto"
+                        type="button"
+                        mat-stroked-button>
+                        <mat-icon
+                            class="icon-size-6"
+                            [svgIcon]="'mat_solid:facebook'"></mat-icon>
+                    </button>
+                    <button
+                        class="flex-auto"
+                        type="button"
+                        mat-stroked-button>
+                        <mat-icon
+                            class="icon-size-6"
+                            [svgIcon]="'feather:twitter'"></mat-icon>
+                    </button>
+                </div> -->
+
+                <!-- <div class="flex items-baseline mt-5">
+                    <div>Ainda não tem uma conta?</div>
+                    <a
+                        class="ml-1 text-primary-500 hover:underline"
+                        [routerLink]="['/cadastrar']">Cadastrar-me
+                    </a>
+                </div> -->
+            </form>
+        </div>
+    </div>
+</div>

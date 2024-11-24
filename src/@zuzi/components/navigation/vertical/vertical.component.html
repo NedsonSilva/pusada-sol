@@ -1,0 +1,124 @@
+<div class="zuzi-vertical-navigation-wrapper">
+
+    <!-- Header -->
+    <div class="zuzi-vertical-navigation-header">
+        <ng-content select="[zuziVerticalNavigationHeader]"></ng-content>
+    </div>
+
+    <!-- Content -->
+    <div
+        class="zuzi-vertical-navigation-content"
+        zuziScrollbar
+        [zuziScrollbarOptions]="{wheelPropagation: inner, suppressScrollX: true}"
+        #navigationContent>
+
+        <!-- Content header -->
+        <div class="zuzi-vertical-navigation-content-header">
+            <ng-content select="[zuziVerticalNavigationContentHeader]"></ng-content>
+        </div>
+
+        <!-- Items -->
+        <ng-container *ngFor="let item of navigation; trackBy: trackByFn">
+
+            <!-- Skip the hidden items -->
+            <ng-container *ngIf="(item.hidden && !item.hidden(item)) || !item.hidden">
+
+                <!-- Aside -->
+                <ng-container *ngIf="item.type === 'aside'">
+                    <zuzi-vertical-navigation-aside-item
+                        [item]="item"
+                        [name]="name"
+                        [activeItemId]="activeAsideItemId"
+                        [autoCollapse]="autoCollapse"
+                        [skipChildren]="true"
+                        (click)="toggleAside(item)"></zuzi-vertical-navigation-aside-item>
+                </ng-container>
+
+                <!-- Basic -->
+                <ng-container *ngIf="item.type === 'basic'">
+                    <zuzi-vertical-navigation-basic-item
+                        [item]="item"
+                        [name]="name"
+                        [matTooltip]="item.title"
+                        [matTooltipDisabled]="appearance !== 'dense'"></zuzi-vertical-navigation-basic-item>
+                </ng-container>
+
+                <!-- Collapsable -->
+                <ng-container *ngIf="item.type === 'collapsable'">
+                    <zuzi-vertical-navigation-collapsable-item
+                        [item]="item"
+                        [name]="name"
+                        [autoCollapse]="autoCollapse"></zuzi-vertical-navigation-collapsable-item>
+                </ng-container>
+
+                <!-- Divider -->
+                <ng-container *ngIf="item.type === 'divider'">
+                    <zuzi-vertical-navigation-divider-item
+                        [item]="item"
+                        [name]="name"></zuzi-vertical-navigation-divider-item>
+                </ng-container>
+
+                <!-- Group -->
+                <ng-container *ngIf="item.type === 'group'">
+                    <zuzi-vertical-navigation-group-item
+                        [item]="item"
+                        [name]="name"
+                        [autoCollapse]="autoCollapse"></zuzi-vertical-navigation-group-item>
+                </ng-container>
+
+                <!-- Spacer -->
+                <ng-container *ngIf="item.type === 'spacer'">
+                    <zuzi-vertical-navigation-spacer-item
+                        [item]="item"
+                        [name]="name"></zuzi-vertical-navigation-spacer-item>
+                </ng-container>
+
+            </ng-container>
+
+        </ng-container>
+
+        <!-- Content footer -->
+        <div class="zuzi-vertical-navigation-content-footer">
+            <ng-content select="[zuziVerticalNavigationContentFooter]"></ng-content>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="zuzi-vertical-navigation-footer">
+        <ng-content select="[zuziVerticalNavigationFooter]"></ng-content>
+    </div>
+
+</div>
+
+<!-- Aside -->
+<ng-container *ngIf="activeAsideItemId">
+    <div
+        class="zuzi-vertical-navigation-aside-wrapper"
+        zuziScrollbar
+        [zuziScrollbarOptions]="{wheelPropagation: false, suppressScrollX: true}"
+        [@fadeInLeft]="position === 'left'"
+        [@fadeInRight]="position === 'right'"
+        [@fadeOutLeft]="position === 'left'"
+        [@fadeOutRight]="position === 'right'">
+
+        <!-- Items -->
+        <ng-container *ngFor="let item of navigation; trackBy: trackByFn">
+
+            <!-- Skip the hidden items -->
+            <ng-container *ngIf="(item.hidden && !item.hidden(item)) || !item.hidden">
+
+                <!-- Aside -->
+                <ng-container *ngIf="item.type === 'aside' && item.id === activeAsideItemId">
+                    <zuzi-vertical-navigation-aside-item
+                        [item]="item"
+                        [name]="name"
+                        [autoCollapse]="autoCollapse"></zuzi-vertical-navigation-aside-item>
+                </ng-container>
+
+            </ng-container>
+
+        </ng-container>
+
+    </div>
+</ng-container>
