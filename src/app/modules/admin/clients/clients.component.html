@@ -7,7 +7,7 @@
             <div class="grow">
                 <mat-form-field class="w-full zuzi-mat-no-subscript zuzi-mat-dense">
                     <mat-icon matIconPrefix svgIcon="mat_outline:search"></mat-icon>
-                    <input matInput placeholder="Pesquisar">
+                    <input (input)="search()" [(ngModel)]="filter.searchParam" matInput placeholder="Pesquisar">
                 </mat-form-field>
             </div>
             <div>

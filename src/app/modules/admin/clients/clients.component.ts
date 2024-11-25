@@ -7,6 +7,7 @@ import { ToastService } from 'angular-toastify';
 import { Client, ClientFilter, ClientPaginate } from 'app/services/clients/clients.types';
 import { ClientService } from 'app/services/clients/client.service';
 import { ClientFormComponent } from './form/form.component';
+import { debounce } from 'lodash';
 
 @Component({
     templateUrl: './clients.component.html',
@@ -103,6 +104,8 @@ export class ClientsComponent implements OnInit {
             }
         )
     }
+
+    search = debounce(() => this.getClients(), 300);
 
     trackByFn(data) {
         return data.id
