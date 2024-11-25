@@ -6,6 +6,7 @@ import { UsersService } from 'app/services/users/users.service';
 
 import { UserFormComponent } from './form/form.component';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { debounce } from 'lodash';
 
 @Component({
     selector: 'users',
@@ -35,6 +36,8 @@ export class UsersComponent extends ListBase<User, UserFilter, UsersService> {
             autoFocus: true
         });
     }
+
+    search = debounce(() => this.getAll(), 300);
 
 
     remove(user: User) {

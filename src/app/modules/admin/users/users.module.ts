@@ -13,11 +13,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { UserFormModule } from './form/form.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [UsersComponent],
     imports: [
         CommonModule,
+        FormsModule,
         RouterModule.forChild(usersRoutes),
         MatPaginatorModule,
         SplitButtonModule,
