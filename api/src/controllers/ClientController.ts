@@ -5,7 +5,7 @@ import { ListClientsService } from '../services/ClientsServices/ListClientsServi
 import { CreateClientService } from '../services/ClientsServices/CreateClientService';
 import { ShowClientService } from '../services/ClientsServices/ShowClientService';
 import { UpdateClientService } from '../services/ClientsServices/UpdateClientService';
-import { DeleteClientService } from '../services/ClientsServices/DeleteCientService';
+import { DeleteClientService } from '../services/ClientsServices/DeleteClientService';
 
 type IndexQuery = {
     searchParam: string;
