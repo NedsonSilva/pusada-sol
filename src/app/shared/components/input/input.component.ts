@@ -31,8 +31,6 @@ export class InputComponent extends ControlValueAcessorBase implements ControlVa
    * is password?
    */
     @Input() isPwd: boolean = false;
-    @Input() iconPrefix: 'matPrefix' | 'matSuffix';
-    @Input() icon: string;
     @Input() class: string;
     @Input() textMask: TextMask;
     @Input() placeholder: string;
@@ -41,6 +39,8 @@ export class InputComponent extends ControlValueAcessorBase implements ControlVa
     @Input() inputMode: InputMode;
     @Input() readonly: boolean;
     @Input() autocomplete: 'on'|'off' = 'on';
+    @Input() useMatPrefix: boolean = false;
+    @Input() useMatSuffix: boolean = false;
 
     get mask(): string {
         return typeof this.textMask !== 'string'

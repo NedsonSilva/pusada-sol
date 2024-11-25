@@ -35,7 +35,7 @@
                                 E-mail
                             </th>
                             <th class="p-2 whitespace-nowrap">
-                                Cpf
+                                Cpf/Cnpj
                             </th>
                             <th class="p-2 whitespace-nowrap">
                                 Endereço
@@ -45,9 +45,37 @@
                     </thead>
                     <tbody>
                         @for (item of clients()?.data; track item.id) {
-                            <tr class="border-b">
-                                <td class="p-2 whitespace-nowrap">
-
+                            <tr class="border-b text-center">
+                                <td class="p-2 truncate">
+                                    {{ item.id }}
+                                </td>
+                                <td class="p-2 truncate min-w-30">
+                                    {{ item.name }}
+                                </td>
+                                <td class="p-2 truncate">
+                                    {{ item.phone|mask:'(00) 00000-0000' }}
+                                </td>
+                                <td class="p-2 truncate">
+                                    {{ item.email || 'Não informado' }}
+                                </td>
+                                <td class="p-2 truncate">
+                                    {{ item.cpfCnpj|mask:'000.000.000-00||00.000.000/0000-00' }}
+                                </td>
+                                <td [title]="buildAddress(item)" class="p-2 truncate max-w-80">
+                                    {{ buildAddress(item) }}
+                                </td>
+                                <td class="p-2 truncate">
+                                    <button [matMenuTriggerFor]="menuActions" mat-icon-button>
+                                        <mat-icon svgIcon="heroicons_outline:dots-vertical" class="text-current"></mat-icon>
+                                    </button>
+                                    <mat-menu #menuActions>
+                                        <button (click)="openModalFormClient(item)" mat-menu-item>
+                                            <span class="font-medium">Editar</span>
+                                        </button>
+                                        <button (click)="remove(item)" mat-menu-item>
+                                            <span class="font-medium text-warn">Excluir</span>
+                                        </button>
+                                    </mat-menu>
                                 </td>
                             </tr>
                         }

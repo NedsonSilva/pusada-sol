@@ -1,0 +1,116 @@
+<div class="w-[90vw] md:w-160 max-w-screen-md min-h-40 bg-default">
+    <h2 mat-dialog-title class="text-primary font-semibold">
+        {{ data.client?.id ? 'Editar' : 'Adicionar' }} Cliente
+    </h2>
+
+    <mat-dialog-content class="pt-2">
+        <form [formGroup]="form" class="text-default">
+            <div class="flex flex-col gap-5">
+                <div>
+                    <app-input label="Nome" formControlName="name"></app-input>
+                </div>
+                <div>
+                    <app-input label="Telefone" textMask="celular" placeholder="(00) 90000-0000" formControlName="phone"></app-input>
+                </div>
+                <div>
+                    <app-input label="E-mail" formControlName="email" placeholder="exemplo@gmail.com"></app-input>
+                </div>
+                <div>
+                    <app-input label="CPF ou CNPJ" textMask="cpfCnpj" formControlName="cpfCnpj"></app-input>
+                </div>
+                <div>
+                    <app-input label="Data de nascimento" type="date"  eplaceholder="00/00/0000" formControlName="birthDate"></app-input>
+                </div>
+
+                <div>
+                    <h2 class="text-lg font-medium">Endereço:</h2>
+                </div>
+
+                <div class="grid sm:grid-cols-6 gap-6 w-full mt-5">
+                    <div class="sm:col-span-2">
+                        <app-input
+                            label="Cep"
+                            formControlName="addressZipCode"
+                            (input)="getCep()"
+                            placeholder="00000-000"
+                            textMask="cep"
+                            [useMatSuffix]="true"
+                        >
+                            @if (form.controls.addressZipCode.disabled) {
+                                <div appMatSuffix class="mr-2">
+                                    <mat-progress-spinner diameter="24" mode="indeterminate"></mat-progress-spinner>
+                                </div>
+                            }
+                        </app-input>
+                    </div>
+                    <div class="sm:col-span-4">
+                        <app-input label="Logradouro" formControlName="addressStreet"></app-input>
+                    </div>
+                    <div class="sm:col-span-full">
+                        <app-input label="Bairro" formControlName="addressNeighborhood"></app-input>
+                    </div>
+                    <div class="sm:col-span-4">
+                        <app-input label="Complemento" formControlName="addressComplement"></app-input>
+                    </div>
+                    <div class="sm:col-span-2">
+                        <app-input label="Número" formControlName="addressNumber"></app-input>
+                    </div>
+                    <div class="sm:col-span-2">
+                        <mat-form-field class="fuse-mat-no-subscript fuse-mat-dense w-full">
+                            <mat-label>UF</mat-label>
+                            <mat-select formControlName="addressState" (selectionChange)="getCityByUf($event.value)" >
+                                @for (item of states; track item.uf) {
+                                    <mat-option [value]="item.uf">
+                                        {{ item.uf }} - {{ item.name }}
+                                    </mat-option>
+                                }
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="sm:col-span-4 container-select">
+                        <mat-form-field class="fuse-mat-no-subscript fuse-mat-dense w-full">
+                            <mat-label>Cidade</mat-label>
+                            <mat-select formControlName="addressCity">
+                                @for (item of cities$ | async; track item.id) {
+                                    <mat-option [value]="item.nome">
+                                        {{ item.nome }}
+                                    </mat-option>
+                                } @empty {
+                                    <mat-option disabled class="disabled:opacity-100">
+                                        Nenhuma cidade encontrada
+                                    </mat-option>
+                                }
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </mat-dialog-content>
+    <div class="w-full border-t min-w-full"></div>
+    <mat-dialog-actions class="px-5 block" align="end">
+        <button
+            type="button"
+            mat-button
+            mat-dialog-close
+            color="warn"
+            [disabled]="form.disabled"
+        >
+            Cancelar
+        </button>
+        <button
+            mat-flat-button
+            color="primary"
+            (click)="submitForm()"
+            [disabled]="form.disabled"
+            class="min-w-30"
+        >
+            {{ data.client?.id ? 'Salvar' : 'Adicionar' }}
+            @if (form.disabled) {
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <mat-progress-spinner diameter="24" mode="indeterminate"></mat-progress-spinner>
+                </div>
+            }
+        </button>
+    </mat-dialog-actions>
+</div>

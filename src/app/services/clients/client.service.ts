@@ -1,10 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Contact } from 'app/models/contacts.types';
+import { buildFilter } from 'app/shared/utils/build-filter';
 import { environment } from 'environments/environment';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 
-import { buildFilter } from 'app/shared/utils/build-filter';
 import { Client, ClientFilter, ClientPaginate } from './clients.types';
 
 @Injectable({
@@ -28,7 +27,7 @@ export class ClientService {
         )
     }
 
-    create(data: Contact): Observable<Client> {
+    create(data: Client): Observable<Client> {
         return this.http
             .post<Client>(this.urlBase, data)
             .pipe(tap((res) => this.upsertData(res)));

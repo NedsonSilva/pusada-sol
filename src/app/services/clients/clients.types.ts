@@ -7,7 +7,7 @@ export class Client {
     phone: string;
     cpfCnpj: string;
     gender: string;
-    birthDate: Date;
+    birthDate: string;
     addressZipCode: string;
     addressCity: string;
     addressState: string;
@@ -18,7 +18,6 @@ export class Client {
     status: number;
     createdAt: Date;
     updatedAt: Date;
-    deletedAt: Date;
 }
 
 export class ClientPaginate {

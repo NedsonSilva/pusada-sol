@@ -5,7 +5,8 @@ import { PageEvent } from '@angular/material/paginator';
 import { ZuziConfirmService } from '@zuzi/services/confirm';
 import { ToastService } from 'angular-toastify';
 import { Client, ClientFilter, ClientPaginate } from 'app/services/clients/clients.types';
-import { ClientService } from 'app/services/clients/reservation.service';
+import { ClientService } from 'app/services/clients/client.service';
+import { ClientFormComponent } from './form/form.component';
 
 @Component({
     templateUrl: './clients.component.html',
@@ -56,17 +57,51 @@ export class ClientsComponent implements OnInit {
         )
     }
 
-    openModalFormClient(contact?: Client) {
-        // this.dialog.open(ContactsFormComponent, {
-        //     data: contact,
-        //     autoFocus: true
-        // })
+    openModalFormClient(client?: Client) {
+        this.dialog.open(ClientFormComponent, {
+            data: { client: { ...client } },
+            autoFocus: true,
+            maxHeight: '85vh',
+            maxWidth: '95vw'
+        })
     }
 
     setPage(event: PageEvent) {
         this.filter.pageNumber = event.pageIndex + 1;
         this.filter.perPage = event.pageSize;
         this.getClients();
+    }
+
+    buildAddress(client: Client): string {
+        const {
+            addressZipCode,
+            addressCity,
+            addressState,
+            addressNeighborhood,
+            addressStreet,
+            addressNumber,
+            addressComplement
+        } = client;
+
+        if (!addressZipCode) return 'Não informado';
+
+        return `${addressStreet}, ${addressNumber || 'SN'}, ${addressComplement}, ${addressNeighborhood}, ${addressCity}, ${addressState}, ${addressZipCode}`
+    }
+
+    remove(client: Client) {
+        this.confirmService.open(
+            { title: 'Excluir Cliente' },
+            () => {
+                this.loading.set(true)
+                this.service.delete(client.id).subscribe({
+                    next: () => {
+                        this.toastService.success('Cliente excluido com sucesso');
+                        this.loading.set(false);
+                    },
+                    error: () => this.loading.set(false),
+                });
+            }
+        )
     }
 
     trackByFn(data) {

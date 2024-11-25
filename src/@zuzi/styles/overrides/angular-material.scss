@@ -1147,6 +1147,9 @@ body.dark .mat-mdc-progress-bar, body .dark .mat-mdc-progress-bar {
 
 /* Fix the outline appearance */
 .mat-mdc-form-field.mat-form-field-appearance-outline {
+    .mat-mdc-select-arrow {
+        color: var(--zuzi-text-secondary) !important;
+    }
 
     .mat-form-field-wrapper {
 
@@ -1157,8 +1160,15 @@ body.dark .mat-mdc-progress-bar, body .dark .mat-mdc-progress-bar {
             }
         }
     }
+
 }
 
+.mat-mdc-option.mdc-list-item--disabled .mat-mdc-option-pseudo-checkbox,
+.mat-mdc-option.mdc-list-item--disabled .mdc-list-item__primary-text,
+.mat-mdc-option.mdc-list-item--disabled > mat-icon {
+    color: var(--zuzi-text-disabled) !important;
+    opacity: 1 !important;
+}
 /* Fix the outline appearance */
 .mat-mdc-form-field {
     &.mat-mdc-text-field-wrapper {

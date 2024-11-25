@@ -14,14 +14,14 @@ module.exports = {
                 allowNull: false,
                 references: { model: 'Reservations', key: 'id' },
                 onDelete: 'CASCADE',
-                onUpdate: 'CASCADE'
+                onUpdate: 'SET NULL'
             },
             clientId: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
                 references: { model: 'Clients', key: 'id' },
                 onDelete: 'CASCADE',
-                onUpdate: 'CASCADE'
+                onUpdate: 'SET NULL'
             },
             method: {
                 type: DataTypes.STRING(50),

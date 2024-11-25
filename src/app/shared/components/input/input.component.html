@@ -56,7 +56,13 @@
             [autocomplete]="autocomplete"
         />
     }
-    @if (iconPrefix === 'matPrefix' || (icon && iconPrefix !== 'matSuffix')) {
+    <span matPrefix *ngIf="useMatPrefix">
+        <ng-content select="[appMatPrefix]"></ng-content>
+    </span>
+    <span matSuffix *ngIf="useMatSuffix">
+        <ng-content select="[appMatSuffix]"></ng-content>
+    </span>
+    <!-- @if (iconPrefix === 'matPrefix' || (icon && iconPrefix !== 'matSuffix')) {
         <mat-icon class="icon-size-5" [svgIcon]="icon" matPrefix>
             <ng-content select="[fontIcon]"></ng-content>
         </mat-icon>
@@ -65,7 +71,7 @@
         <mat-icon class="icon-size" [svgIcon]="icon" matSuffix>
             <ng-content select="[fontIcon]"></ng-content>
         </mat-icon>
-    }
+    } -->
 
     <mat-error *ngIf="hasError()">
         {{ errorMessage() }}
