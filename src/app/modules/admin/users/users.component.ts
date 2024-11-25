@@ -32,6 +32,7 @@ export class UsersComponent extends ListBase<User, UserFilter, UsersService> {
             data: { user: { ...user } },
             maxWidth: '95vw',
             maxHeight: '85vh',
+            autoFocus: true
         });
     }
 

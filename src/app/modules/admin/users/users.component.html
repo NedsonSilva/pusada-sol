@@ -63,7 +63,7 @@
                                 {{ (user.lastLogin|date:'dd/MM/y HH:mm') || 'Sem sessão iniciada' }}
                             </td>
                             <td class="px-2">
-                                {{ user.updatedAt|date:'dd/MM/y HH:mm' }}
+                                {{ user.createdAt|date:'dd/MM/y HH:mm' }}
                             </td>
                             <td class="px-2">
                                 <button [matMenuTriggerFor]="menuActions" mat-icon-button>

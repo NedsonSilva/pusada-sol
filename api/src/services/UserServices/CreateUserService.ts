@@ -1,7 +1,6 @@
 import * as Yup from 'yup';
 
 import AppError from '../../errors/AppError';
-import { SerializeUser } from '../../helpers/SerializeUser';
 import User from '../../models/User';
 
 interface Request {
@@ -11,19 +10,12 @@ interface Request {
     profile?: number;
 }
 
-interface Response {
-    id: number;
-    name: string;
-    email: string;
-    profile: number;
-}
-
 export const CreateUserService = async ({
     email,
     password,
     name,
     profile = 10,
-}: Request): Promise<Response> => {
+}: Request): Promise<User> => {
     const schema = Yup.object().shape({
         name: Yup.string().required().min(2),
         email: Yup.string()
@@ -61,5 +53,5 @@ export const CreateUserService = async ({
 
     await user.reload();
 
-    return SerializeUser(user);
+    return user;
 };
