@@ -10,7 +10,7 @@
     [opened]="true">
 
     <ng-container zuziVerticalNavigationContentHeader>
-        <div class="mb-2" [class.mt-10]="alertBar.notifications?.length">
+        <div class="mb-5 mt-5" [class.mt-10]="alertBar.notifications?.length">
             @if (navigationAppearance === 'dense') {
                 <div class="flex items-center justify-center h-16">
                     <img
@@ -21,8 +21,12 @@
             } @else {
                 <div class="flex items-center justify-center h-22 py-2">
                     <img
-                        class="w-[90%] object-contain"
-                        src="assets/images/logo/Logo-icon-text.png"
+                        class="w-[50%] object-contain dark:hidden"
+                        src="assets/images/logo/logo.png"
+                        alt="Logo image">
+                    <img
+                        class="w-[50%] object-contain hidden dark:block"
+                        src="assets/images/logo/logo-dark.png"
                         alt="Logo image">
                 </div>
             }
@@ -36,7 +40,7 @@
 <!-- Wrapper -->
 <div class="relative flex flex-col flex-auto w-full min-w-0" [class.pt-10]="alertBar.notifications?.length">
     <!-- Header -->
-    <div class="flex flex-0 items-center w-full h-12 px-4 md:px-5 z-49 shadow dark:shadow-none dark:border-b bg-primary dark:bg-card text-white print:hidden">
+    <div class="flex flex-0 items-center w-full h-11 px-4 md:px-5 z-49 shadow dark:shadow-none dark:border-b bg-primary dark:bg-card text-white print:hidden">
         <div class="flex items-center pr-2 space-x-1 -ml-3">
             <!-- Navigation appearance toggle button -->
             <button
@@ -62,7 +66,7 @@
         <!-- Components -->
         <div class="flex items-center pl-2 ml-auto space-x-0.5 sm:space-x-2">
             <!-- <shortcuts></shortcuts> -->
-            <messages></messages>
+            <!-- <messages></messages> -->
             <!-- <notifications></notifications> -->
             <!-- <button
                 class="lg:hidden"
