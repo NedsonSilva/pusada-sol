@@ -9,6 +9,7 @@ import { RoomService } from 'app/services/Rooms/room.service';
 import { Room, RoomFilter, RoomPaginate } from 'app/services/Rooms/rooms.types';
 
 import { RoomFormComponent } from './form/form.component';
+import { debounce } from 'lodash';
 
 @Component({
     templateUrl: './rooms.component.html',
@@ -68,6 +69,9 @@ export class RoomsComponent implements OnInit {
             autoFocus: true
         })
     }
+
+    search = debounce(() => this.getRooms(), 300);
+
 
     remove(room: Room) {
         this.confirmService.open(

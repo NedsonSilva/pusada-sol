@@ -9,7 +9,6 @@ import { SplitButtonModule } from 'app/shared/components/split-button/split-butt
 import { FormSharedModule } from 'app/shared/form-shared.module';
 import { NgxMaskPipe } from 'ngx-mask';
 
-import { ContactsFormModule } from '../reservations/form/form.module';
 import { ClientsComponent } from './clients.component';
 import { clientsRoutes } from './clients.routes';
 import { ClientFormComponent } from './form/form.component';
@@ -23,7 +22,6 @@ import { ClientFormComponent } from './form/form.component';
         SplitButtonModule,
         MatSortModule,
         MatMenuModule,
-        ContactsFormModule,
         MatDialogModule,
         MatProgressSpinnerModule,
         NgxMaskPipe

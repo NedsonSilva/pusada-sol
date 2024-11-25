@@ -42,6 +42,11 @@ export const ListRoomsService = async ({
                     }
                 },
                 {
+                    dailyPrice: {
+                        [Op.like]: `%${sanitazedSearchParam}%`
+                    }
+                },
+                {
                     status: where(
                         fn('LOWER', col('Room.status')),
                         'LIKE',
