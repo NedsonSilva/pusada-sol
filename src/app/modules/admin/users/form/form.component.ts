@@ -37,6 +37,7 @@ export class UserFormComponent extends FormBase implements OnInit {
         } else {
             this.form.get('password').addValidators(Validators.required);
             this.form.get('password').updateValueAndValidity();
+            this.form.get('confirmPassword').addValidators(Validators.required);
         }
     }
 
