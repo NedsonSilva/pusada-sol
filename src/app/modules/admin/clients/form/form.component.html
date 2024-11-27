@@ -5,14 +5,14 @@
 
     <mat-dialog-content class="pt-2">
         <form [formGroup]="form" class="text-default">
-            <div class="flex flex-col gap-5">
+            <div class="grid md:grid-cols-2 gap-4">
                 <div>
                     <app-input label="Nome" formControlName="name"></app-input>
                 </div>
                 <div>
                     <app-input label="Telefone" textMask="celular" placeholder="(00) 90000-0000" formControlName="phone"></app-input>
                 </div>
-                <div>
+                <div class="col-span-full">
                     <app-input label="E-mail" formControlName="email" placeholder="exemplo@gmail.com"></app-input>
                 </div>
                 <div>
@@ -22,11 +22,11 @@
                     <app-input label="Data de nascimento" type="date"  eplaceholder="00/00/0000" formControlName="birthDate"></app-input>
                 </div>
 
-                <div>
+                <div class="col-span-full">
                     <h2 class="text-lg font-medium">Endereço:</h2>
                 </div>
 
-                <div class="grid sm:grid-cols-6 gap-6 w-full mt-5">
+                <div class="col-span-full grid sm:grid-cols-6 gap-4 w-full mt-2">
                     <div class="sm:col-span-2">
                         <app-input
                             label="Cep"
